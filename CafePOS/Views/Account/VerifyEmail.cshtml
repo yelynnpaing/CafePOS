@@ -1,0 +1,32 @@
+﻿@using CafePOS.ViewModels
+@model VerifyEmailViewModel
+
+@{
+    ViewData["Title"] = "Email Verify";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="account-container">
+    <div class="account-box">
+        <h4 class="text-center fw-bold">Verify Email</h4>
+        <form asp-action="VerifyEmail" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email"  class="text-danger"></span>
+            </div>
+            <input type="submit" value="Verify" class="btn btn-primary w-100 p-2" />
+            <div class="text-center fw-bold mt-3">
+                <a asp-controller="Home" asp-action="Index">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
+    }
+}
