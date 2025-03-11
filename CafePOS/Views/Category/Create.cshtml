@@ -1,0 +1,26 @@
+﻿@model Category
+
+@{
+    ViewBag.Title = "Category Create";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-7 col-md-7 col-lg-7">
+            <div class="border p-5">
+                <h4 class="text-center">Category Create</h4>
+                <hr class="mb-5" />
+                <form asp-action="Create" method="post">
+                    <div class="mb-3">
+                        <label asp-for="CatName" class="form-label"></label>
+                        <input asp-for="CatName" class="form-control" />
+                        <span asp-validation-for="CatName" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-3">Save</button>
+                    <a asp-controller="AdminPanel" asp-action="Dashboard" class="btn btn-secondary">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

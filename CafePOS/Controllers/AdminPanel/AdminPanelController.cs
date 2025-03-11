@@ -8,5 +8,7 @@ namespace CafePOS.Controllers.AdminPanel
         {
             return View();
         }
+
+
     }
 }
