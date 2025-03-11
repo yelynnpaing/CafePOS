@@ -2,24 +2,27 @@
 let sideItems = document.querySelectorAll(".navbar-left-side-item");
 let sideLabels = document.querySelectorAll(".side-label");
 let sideIcons = document.querySelectorAll(".side-icon");
-let sideLabel1 = document.getElementById('sideLabel1');
-let productCollapseBtn = document.getElementById("productCollapeBtn");
+
+//let productCollapseBtn = document.getElementById("productCollapeBtn");
 let cusCollapseBtn = document.getElementById("cusCollapseBtn");
 let ProdChevronRight = document.getElementById("ProdChevronRight");
 let cusChevronRight = document.getElementById("cusChevronRight");
 let mainSidebar = document.getElementById("mainSidebar");
+let mainSidebarItem = document.getElementById("mainSidebarItem");
 let mainContent = document.getElementById("mainContent");
 
-productCollapseBtn.onclick = function () {
-    ProdChevronRight.classList.toggle("rotate");
-}
-cusCollapseBtn.onclick = function () {
+//productCollapseBtn.onclick = function () {
+//    ProdChevronRight.classList.toggle("rotate");
+//}
+cusCollapseBtn.onclick = function () {    
     cusChevronRight.classList.toggle("rotate");
 }
 
 menuIcon.onclick = function minimize() {
     mainSidebar.classList.toggle("transition-effect1");
     mainSidebar.classList.toggle("transition-effect2");
+    mainSidebarItem.classList.toggle("transition-effect1");
+    mainSidebarItem.classList.toggle("transition-effect2");
     mainContent.classList.toggle("transition-effect1");
     mainContent.classList.toggle("transition-effect2");
     mainSidebar.classList.toggle("col-xl-2");
@@ -35,8 +38,7 @@ menuIcon.onclick = function minimize() {
     mainContent.classList.toggle("col-sm-9");
     mainContent.classList.toggle("col-sm-11");
     sideLabels.forEach(label => {
-        label.classList.toggle('d-md-none')
-        label.classList.toggle("active");
+        label.classList.toggle('d-md-none')       
     });
     sideIcons.forEach(icon => {
         icon.classList.toggle("text-center");

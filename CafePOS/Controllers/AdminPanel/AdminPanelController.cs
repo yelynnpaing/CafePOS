@@ -4,7 +4,7 @@ namespace CafePOS.Controllers.AdminPanel
 {
     public class AdminPanelController : Controller
     {
-        public IActionResult PosAdmin()
+        public IActionResult Dashboard()
         {
             return View();
         }

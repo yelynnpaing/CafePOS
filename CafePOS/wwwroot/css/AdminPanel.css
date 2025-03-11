@@ -5,12 +5,10 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-a {
-    text-decoration: none;
-}
-
-li {
-    list-style-type: none;
+.header {
+    background: #ffffffb5;
+    backdrop-filter: blur(15px) contrast(130%);
+    z-index: 1005;
 }
 
 .nav a.active {
@@ -21,10 +19,10 @@ li {
     white-space: nowrap;
 }
 
-    .navbar-left-side-item:hover {
-        background-color: gray;
-        transition: 0.2s ease-in-out;
-    }
+.navbar-left-side-item:hover {
+    background-color: gray;
+    transition: 0.2s ease-in-out;
+}
 
 .rotate {
     transform: rotate(90deg);
@@ -32,7 +30,7 @@ li {
 }
 
 .transition-effect1 {
-    transition: 0.2s ease-in-out;
+    transition: 0.1s ease-in-out;
 }
 
 .transition-effect2 {
