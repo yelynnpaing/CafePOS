@@ -23,6 +23,11 @@ namespace CafePOS.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Item>()
+                .HasOne(i => i.Category)
+                .WithMany(c => c.Items)
+                .HasForeignKey(i => i.CategoryId);
+
             base.OnModelCreating(modelBuilder);
         }
     }

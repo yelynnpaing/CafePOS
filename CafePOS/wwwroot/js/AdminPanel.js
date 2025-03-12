@@ -3,17 +3,18 @@ let sideItems = document.querySelectorAll(".navbar-left-side-item");
 let sideLabels = document.querySelectorAll(".side-label");
 let sideIcons = document.querySelectorAll(".side-icon");
 
-//let productCollapseBtn = document.getElementById("productCollapeBtn");
+
+let catCollapseBtn = document.getElementById("catCollapseBtn");
+let catChevronRight = document.getElementById("catChevronRight");
 let cusCollapseBtn = document.getElementById("cusCollapseBtn");
-let ProdChevronRight = document.getElementById("ProdChevronRight");
 let cusChevronRight = document.getElementById("cusChevronRight");
 let mainSidebar = document.getElementById("mainSidebar");
 let mainSidebarItem = document.getElementById("mainSidebarItem");
 let mainContent = document.getElementById("mainContent");
 
-//productCollapseBtn.onclick = function () {
-//    ProdChevronRight.classList.toggle("rotate");
-//}
+catCollapseBtn.onclick = function () {
+    catChevronRight.classList.toggle("rotate");
+}
 cusCollapseBtn.onclick = function () {    
     cusChevronRight.classList.toggle("rotate");
 }

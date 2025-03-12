@@ -1,6 +1,7 @@
 ﻿
 using CafePOS.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime;
 
 namespace CafePOS.Models
 {
@@ -26,9 +27,9 @@ namespace CafePOS.Models
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbset.ToListAsync();
         }
 
         public Task<IEnumerable<T>> GetAllByIdAsync<TKey>(TKey id, string propertyName, QueryOptions<T> options)
@@ -36,12 +37,34 @@ namespace CafePOS.Models
             throw new NotImplementedException();
         }
 
-        public Task<T> GetByIdAsync(int id, QueryOptions<T> options)
+        public async Task<T> GetByIdAsync(Guid id, QueryOptions<T> options)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = _dbset;
+            if (options.HasWhere)
+            {
+                query = query.Where(options.Where);
+            }
+            if (options.HasOrderBy)
+            {
+                query = query.OrderBy(options.OrderBy);
+            }
+            foreach(string include in options.GetIncludes())
+            {
+                query = query.Include(include);
+            }
+
+            var key = _context.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties.FirstOrDefault();
+            string primaryKeyName = key?.Name;
+            return await query.FirstOrDefaultAsync(e => EF.Property<Guid>(e, primaryKeyName) == id);
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
+        {
+            _context.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public Task DeleteAsync(Guid id)
         {
             throw new NotImplementedException();
         }

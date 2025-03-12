@@ -1,4 +1,5 @@
-﻿using Microsoft.Identity.Client;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.Identity.Client;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CafePOS.Models
@@ -13,6 +14,8 @@ namespace CafePOS.Models
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
         public string ImageUrl { get; set; } = "https://via.placeholder.com/150";
+        [ValidateNever]
+        public Category? Category { get; set; }
         public int StockQuantity { get; set; }
         public bool IsAvailable { get; set; }
         public  DateTime CreatedAt {get; set;}

@@ -1,0 +1,30 @@
+﻿@model Category
+@{
+    ViewBag.Title = "Category Edit";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row p-3 border">
+        <div class="col-md-12">
+            <div class="mb-5">
+                <h4>Category Edit</h4>
+                <hr />
+            </div>
+        </div>
+        <div class="col-12 col-md-8 col-lg-8">            
+            <form asp-action="Edit" method="post">
+                <div class="mb-3">                            
+                    <input asp-for="@Model.CategoryId" class="form-control" type="hidden" />                    
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CatName" class="form-label"></label>
+                    <input asp-for="CatName" class="form-control" />
+                    <span asp-validation-for="CatName" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary me-3">Update</button>
+                <a asp-controller="Category" asp-action="Index" class="btn btn-secondary">Back</a>
+            </form>
+        </div>
+    </div>
+</div>

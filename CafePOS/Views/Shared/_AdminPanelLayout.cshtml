@@ -25,9 +25,21 @@
                         <a href="#" class="nav-link icon-link-hover text-white navbar-left-side-item">
                             <i class="bi bi-speedometer2 side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Dashboard Admin</span>
                         </a>
-                        <a href="#" class="nav-link text-white navbar-left-side-item">
-                            <i class="bi bi-grid side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Category</span>
+                        <a class="nav-link text-white navbar-left-side-item d-flex" data-bs-toggle="collapse" type="button" data-bs-target="#catCollapse"
+                           role="button" aria-expanded="false" aria-controls="catCollapse" id="catCollapseBtn">
+                            <div>
+                                <i class="bi bi-grid side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Category</span>
+                            </div>
+                            <i class="ms-2 bi bi-chevron-right ms-auto" id="catChevronRight"></i>
                         </a>
+                        <div class="collapse ps-sm-1 ps-md-3 ps-xl-3" id="catCollapse">
+                            <a href="/admin/category/create" class="nav-link text-white navbar-left-side-item">
+                                <i class="bi bi-grid"></i><span class="d-none d-md-inline ms-2 side-label">Create</span>
+                            </a>
+                            <a href="/admin/category/index" class="nav-link text-white navbar-left-side-item">
+                                <i class="bi bi-grid side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Category List</span>
+                            </a>
+                        </div>
                         <a href="#" class="nav-link text-white navbar-left-side-item">
                             <i class="bi bi-card-checklist side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Product</span>
                         </a>
@@ -82,7 +94,7 @@
                 </div>
                 <div class="px-3">
                     <div class="container-fluid">
-                        <main role="main" class="py-3 px-2">
+                        <main role="main" class="">
                             @RenderBody()
                         </main>
                     </div>

@@ -7,9 +7,9 @@ namespace CafePOS.Models
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<IEnumerable<T>> GetAllByIdAsync<TKey>(TKey id, string propertyName, QueryOptions<T> options);
-        Task<T> GetByIdAsync(int id, QueryOptions<T> options);
+        Task<T> GetByIdAsync(Guid id, QueryOptions<T> options);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(Guid id);
     }
 }
