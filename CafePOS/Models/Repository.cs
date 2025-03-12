@@ -22,10 +22,10 @@ namespace CafePOS.Models
             await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task DeleteAsync(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
@@ -64,9 +64,11 @@ namespace CafePOS.Models
             await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            T entity = await _dbset.FindAsync(id);
+            _dbset.Remove(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }

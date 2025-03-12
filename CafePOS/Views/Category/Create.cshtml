@@ -13,12 +13,12 @@
                 <hr class="mb-5" />
                 <form asp-action="Create" method="post">
                     <div class="mb-3">
-                        <label asp-for="CatName" class="form-label"></label>
+                        <label class="form-label">Category Name</label>
                         <input asp-for="CatName" class="form-control" />
                         <span asp-validation-for="CatName" class="text-danger"></span>
                     </div>
                     <button type="submit" class="btn btn-primary me-3">Save</button>
-                    <a asp-controller="AdminPanel" asp-action="Dashboard" class="btn btn-secondary">Back</a>
+                    <a asp-controller="Category" asp-action="Index" class="btn btn-secondary">Back</a>
                 </form>
             </div>
         </div>

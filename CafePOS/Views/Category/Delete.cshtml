@@ -1,0 +1,28 @@
+﻿@model Category
+@{
+    ViewBag.Title = "Delete Category";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row border p-3">
+        <div class="col-md-12 mb-5">
+            <h4>Category Delete</h4>
+            <hr />
+        </div>
+        <div class="col-md-8">
+            <p class="text-warning fs-5">Are you sure want to delete this category name ? </p>
+            <form asp-action="Delete" method="post">
+               <div>
+                    <input type="hidden" asp-for="@Model.CategoryId" />
+               </div>
+               <div class="mb-3">
+                   <label class="form-label">Category Name</label>
+                   <input asp-for="CatName" class="form-control" disabled />
+               </div>
+               <button type="submit" class="btn btn-danger me-3">Delete</button>
+               <a asp-action="Index" class="btn btn-secondary">Back</a>
+            </form>
+        </div>
+    </div>
+</div>
