@@ -1,0 +1,73 @@
+﻿@model Item
+
+@{
+    ViewBag.Title = $"{ViewBag.Operation}";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row border p-3 mb-5">
+        <div class="col-md-12">
+           <div>
+                <h4 class="">Item > @ViewBag.Operation</h4>
+                <hr class="mb-5" />
+           </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <form asp-action="AddEdit" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <input asp-for="ItemId" type="hidden" />
+                            <input asp-for="CategoryId" type="hidden" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="ItemName" class="form-label"></label>
+                            <input asp-for="ItemName" class="form-control" />
+                            <span asp-validation-for="ItemName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Price" class="form-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="StockQuantity" class="form-label"></label>
+                            <input asp-for="StockQuantity" class="form-control" />
+                            <span asp-validation-for="StockQuantity" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="imageUpload" class="form-label">Upload Image</label>
+                            <input type="file" asp-for="ImageFile" name="ImageFile" id="imageUpload" class="form-control" />
+                            <span asp-validation-for="ImageFile" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-12">
+                                <label class="form-label">Select Category</label>
+                                <select class="form-select" name="CatId">
+                                    @foreach (var category in ViewBag.Categories)
+                                    {                                       
+                                       <option value="@category.CategoryId" id="@category.CategoryId"
+                                                selected="@(Model.CategoryId == category.CategoryId ? "selected" : "null")"
+                                       >
+                                           @category.CatName
+                                       </option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary me-3">Save</button>
+                            <a asp-controller="Item" asp-action="Items" class="btn btn-secondary">Back</a>
+                        </div>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

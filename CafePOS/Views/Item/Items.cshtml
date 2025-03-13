@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Item>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row border p-3">
+        <div class="col-md-12 mb-3">
+            <h4>Item List</h4>
+            <hr />
+        </div>
+        <div class="col-md-12">
+            <div class="d-flex float-end mb-3">
+                <a asp-action="AddEdit" class="btn btn-info text-white">Add NewItem</a>
+            </div>
+        </div>
+        <div class="col-md-12 overflow-scroll">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th class="d-none">Id</th>
+                        <th>Image</th>
+                        <th>Item</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>StockQuantity</th>
+                        <th>IsAvailable</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="d-none">@item.ItemId</td>
+                            <td><img src="@Url.Content("~/images/"+item.ImageUrl)" class="" style="width:150px; height:100px;" /></td>
+                            <td>@item.ItemName</td>
+                            <td><textarea readonly>@item.Description</textarea></td>
+                            <td>@item.Price</td>
+                            <td>@item.StockQuantity</td>
+                            <td>@item.IsAvailable</td>
+                            <td>
+                                <a asp-action="AddEdit" asp-route-id="@item.ItemId" class="btn btn-sm btn-primary me-1 mb-1">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@item.ItemId" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
