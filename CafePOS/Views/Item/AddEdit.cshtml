@@ -41,22 +41,26 @@
                             <input asp-for="StockQuantity" class="form-control" />
                             <span asp-validation-for="StockQuantity" class="text-danger"></span>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3">                            
                             <label for="imageUpload" class="form-label">Upload Image</label>
                             <input type="file" asp-for="ImageFile" name="ImageFile" id="imageUpload" class="form-control" />
-                            <span asp-validation-for="ImageFile" class="text-danger"></span>
+                            <span asp-validation-for="ImageFile" class="text-danger"></span>                       
+                            @if (Model.ItemId != Guid.Empty)
+                            {
+                                <img src="@Url.Content("~/images/"+ ViewData["ImageUrl"])" style="width:100px; height:100px" class="mt-2" />
+                            }                            
                         </div>
                         <div class="row mb-5">
                             <div class="col-md-12">
                                 <label class="form-label">Select Category</label>
                                 <select class="form-select" name="CatId">
                                     @foreach (var category in ViewBag.Categories)
-                                    {                                       
-                                       <option value="@category.CategoryId" id="@category.CategoryId"
-                                                selected="@(Model.CategoryId == category.CategoryId ? "selected" : "null")"
-                                       >
-                                           @category.CatName
-                                       </option>
+                                    {                                        
+                                        bool isSelected = Model.CategoryId == category.CategoryId;
+                                        <option value="@category.CategoryId" id="@category.CategoryId"
+                                                selected="@(isSelected ? "selected" : "")">
+                                            @category.CatName
+                                        </option>
                                     }
                                 </select>
                             </div>

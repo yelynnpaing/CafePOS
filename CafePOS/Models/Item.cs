@@ -18,7 +18,8 @@ namespace CafePOS.Models
         public Guid CategoryId { get; set; }
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
-        public string ImageUrl { get; set; } = "https://via.placeholder.com/150";
+        [ValidateNever]
+        public string ImageUrl { get; set; } 
         [ValidateNever]
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }

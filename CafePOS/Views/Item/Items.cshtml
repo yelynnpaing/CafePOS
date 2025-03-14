@@ -27,6 +27,8 @@
                         <th>Price</th>
                         <th>StockQuantity</th>
                         <th>IsAvailable</th>
+                        <th>CreatedAt</th>
+                        <th>UpdatedAt</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -41,9 +43,17 @@
                             <td>@item.Price</td>
                             <td>@item.StockQuantity</td>
                             <td>@item.IsAvailable</td>
+                            <td>@item.CreatedAt</td>
+                            <td>@item.UpdatedAt</td>
                             <td>
-                                <a asp-action="AddEdit" asp-route-id="@item.ItemId" class="btn btn-sm btn-primary me-1 mb-1">Edit</a>
-                                <a asp-action="Delete" asp-route-id="@item.ItemId" class="btn btn-sm btn-danger">Delete</a>
+                                <a asp-action="AddEdit" asp-route-id="@item.ItemId" class="btn btn-sm btn-primary me-1 mb-1">
+                                    <i class="bi bi-pencil-fill me-1"></i>
+                                    Edit
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.ItemId" class="btn btn-sm btn-danger">
+                                    <i class="bi bi-trash me-1"></i>
+                                    Delete
+                                </a>
                             </td>
                         </tr>
                     }
