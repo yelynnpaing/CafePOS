@@ -40,32 +40,29 @@
                                 <i class="bi bi-grid side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Category List</span>
                             </a>
                         </div>
-                        <a href="/admin/item/list" class="nav-link text-white navbar-left-side-item">
-                            <i class="bi bi-card-checklist side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Items</span>
+                        <a class="nav-link text-white navbar-left-side-item d-flex" data-bs-toggle="collapse" type="button" data-bs-target="#itemCollapse"
+                           role="button" aria-expanded="false" aria-controls="itemCollapse" id="itemCollapseBtn">
+                            <div>
+                                <i class="bi bi-card-checklist side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Items</span>
+                            </div>
+                            <i class="ms-2 bi bi-chevron-right ms-auto" id="itemChevronRight"></i>
+                        </a>
+                        <div class="collapse ps-sm-1 ps-md-3 ps-xl-3" id="itemCollapse">
+                            <a href="/admin/item/addEdit" class="nav-link text-white navbar-left-side-item">
+                                <i class="bi bi-card-checklist"></i><span class="d-none d-md-inline ms-2 side-label">Item Create</span>
+                            </a>
+                            <a href="/admin/item/list" class="nav-link text-white navbar-left-side-item">
+                                <i class="bi bi-card-checklist side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Item List</span>
+                            </a>
+                        </div>
+                        <a href="" class="nav-link text-white navbar-left-side-item">
+                            <i class="bi bi-person-circle side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Users</span>
                         </a>
                         <a href="#" class="nav-link text-white navbar-left-side-item">
                             <i class="bi bi-cash-coin side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Order</span>
-                        </a>
-                        <a class="nav-link text-white navbar-left-side-item d-flex" data-bs-toggle="collapse" href="#cusCollapse"
-                           role="button" aria-expanded="false" aria-controls="cusCollapse" id="cusCollapseBtn">
-                            <div>
-                                <i class="bi bi-person-circle side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Customers</span>
-                            </div>
-                            <i class="ms-2 bi bi-chevron-right ms-auto" id="cusChevronRight"></i>
-                        </a>
-                        <div class="collapse ps-sm-1 ps-md-3 ps-xl-3" id="cusCollapse">
-                            <a href="#" class="nav-link text-white navbar-left-side-item">
-                                <i class="bi bi-cash-coin side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Customer1</span>
-                            </a>
-                            <a href="#" class="nav-link text-white navbar-left-side-item">
-                                <i class="bi bi-cash-coin"></i><span class="d-none d-md-inline ms-2 side-label">Customer2</span>
-                            </a>
-                            <a href="#" class="nav-link text-white navbar-left-side-item">
-                                <i class="bi bi-cash-coin side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Customer3</span>
-                            </a>
-                        </div>
+                        </a>                        
                         <a href="#" class="nav-link text-white navbar-left-side-item">
-                            <i class="bi bi-messenger side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Messages</span>
+                            <i class="bi bi-credit-card side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Billing</span>
                         </a>
                     </nav>
                 </div>

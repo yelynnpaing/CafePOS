@@ -6,17 +6,18 @@ let sideIcons = document.querySelectorAll(".side-icon");
 
 let catCollapseBtn = document.getElementById("catCollapseBtn");
 let catChevronRight = document.getElementById("catChevronRight");
-let cusCollapseBtn = document.getElementById("cusCollapseBtn");
-let cusChevronRight = document.getElementById("cusChevronRight");
+let itemCollapseBtn = document.getElementById("itemCollapseBtn");
+let itemChevronRight = document.getElementById("itemChevronRight");
 let mainSidebar = document.getElementById("mainSidebar");
 let mainSidebarItem = document.getElementById("mainSidebarItem");
 let mainContent = document.getElementById("mainContent");
 
-catCollapseBtn.onclick = function () {
+catCollapseBtn.onclick = function () {    
     catChevronRight.classList.toggle("rotate");
 }
-cusCollapseBtn.onclick = function () {    
-    cusChevronRight.classList.toggle("rotate");
+
+itemCollapseBtn.onclick = function () {
+    itemChevronRight.classList.toggle("rotate");
 }
 
 menuIcon.onclick = function minimize() {

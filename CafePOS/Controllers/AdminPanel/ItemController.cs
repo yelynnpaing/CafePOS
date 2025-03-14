@@ -2,6 +2,7 @@
 using CafePOS.Models;
 using CafePOS.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace CafePOS.Controllers.AdminPanel
 {
@@ -118,7 +119,14 @@ namespace CafePOS.Controllers.AdminPanel
                 existingItem.Description = item.Description;
                 existingItem.Price = item.Price;
                 existingItem.StockQuantity = item.StockQuantity;
-                existingItem.ImageUrl = newImageUrl;
+                if(newImageUrl == "")
+                {
+                    existingItem.ImageUrl = oldImageUrl;
+                }
+                else
+                {
+                    existingItem.ImageUrl = newImageUrl;
+                }
                 existingItem.CategoryId = CatId;
                 existingItem.UpdatedAt = DateTime.Now;
                 try
@@ -132,6 +140,36 @@ namespace CafePOS.Controllers.AdminPanel
                     return View(item);
                 }
             }
+            return RedirectToAction("Items", "Item");
+        }
+
+
+        [Route("delete/{id:guid}")]
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var item = await items.GetByIdAsync(id, new QueryOptions<Item> { Includes = "Category" });
+            ViewData["ImageUrl"] = item.ImageUrl;
+            return View(item);
+        }
+
+        [Route("delete/{id:guid}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(Item item)
+        {            
+            var existingItem = await items.GetByIdAsync(item.ItemId, new QueryOptions<Item> { Includes = "Category" });
+            if(existingItem is null)
+            {
+                ModelState.AddModelError("", "No Item Found.");
+                ViewBag.Categories = await categories.GetAllAsync();
+                return View(item);
+            }
+            string imgUploader = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+            string delImgUrl = Path.Combine(imgUploader, existingItem.ImageUrl);
+            System.IO.File.Delete(delImgUrl);
+
+            await items.DeleteAsync(item.ItemId);
             return RedirectToAction("Items", "Item");
         }
     }
