@@ -1,13 +1,13 @@
-.account-container{
-    background-image : url(../Images/acc-bg.jpg);
+.account-container {
+    background-image: url(../Images/Mandalay-Royal-Palace.jpg);
     background-size: cover;
-    background-position : center;
-    background-repeat : repeat-y;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
+    background-position: center;
+    background-repeat: repeat-y;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    padding : 2rem;
+    padding: 2rem;
 }
 
 .account-box{

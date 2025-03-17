@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Item>
+@{
+    ViewBag.Title = "Items";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mt-3">
+        <h4>Available Items</h4>
+        <hr class="mb-3"/>
+        @foreach(var item in Model)
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card shadow-sm rounded">
+                    <img src="@Url.Content("~/Images/"+item.ImageUrl)" class="card-img-top" style="height:150px;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.ItemName</h5>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <p class="card-text fw-bold text-black-50 mb-0">Ks @item.Price</p>
+                            <a asp-controller="UIItemOrder" asp-action="Order"  class="d-inline-block card-text btn btn-sm btn-secondary">Order</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

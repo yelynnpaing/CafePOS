@@ -29,8 +29,11 @@
                         <a href="#" class="nav-link icon-link-hover text-black navbar-left-side-item">
                             <i class="bi bi-house-door side-icon"></i><span class="d-none d-lg-inline ms-2 side-label">Home</span>
                         </a>
-                        <a href="#" class="nav-link text-black navbar-left-side-item">
+                        <a href="/mm-cafe/items/list" class="nav-link text-black navbar-left-side-item">
                             <i class="bi bi-card-checklist side-icon"></i><span class="d-none d-lg-inline ms-2 side-label">Menu</span>
+                        </a>
+                        <a href="#" class="nav-link text-black navbar-left-side-item">
+                            <i class="bi bi-grid side-icon"></i><span class="d-none d-lg-inline ms-2 side-label">Category</span>
                         </a>
                         <a href="#" class="nav-link icon-link-hover text-black navbar-left-side-item">
                             <i class="bi bi-credit-card side-icon"></i><span class="d-none d-lg-inline ms-2 side-label">Payment</span>
@@ -46,8 +49,9 @@
                     <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
                         <div class="container-fluid">
                             <div class="nav-item me-3">
-                                <form>
-                                    <input class="form-control pe-5 me-2" type="search" placeholder="Search product or orders ... " aria-label="Search">
+                                <form asp-action="List" aps-controller="UIItem" method="get" class="d-flex">
+                                    <input class="form-control pe-5 me-2" name="searchString" type="search" placeholder="Search item or order ... " aria-label="Search">
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm px-2">Search</button>
                                 </form>
                             </div>
                              
