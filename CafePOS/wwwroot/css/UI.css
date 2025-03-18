@@ -11,7 +11,15 @@ body {
     z-index: 1005;
 }
 
-.sidebar-icon{
+.navbar-brand-font{
+    font-size:19px;
+}
+
+.nav-font {
+    font-size: 16px;
+}
+
+.sidebar-icon {
     -webkit-text-stroke: 1px;
 }
 .nav a.active {
