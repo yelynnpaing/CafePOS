@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+.header {
+    background: #ffffffb5;
+    backdrop-filter: blur(15px) contrast(130%);
+    z-index: 1005;
+}
+
+.sidebar-icon{
+    -webkit-text-stroke: 1px;
+}
+.nav a.active {
+    background-color: #3d95e2;
+}
+
+.navbar-left-side-item {
+    white-space: nowrap;
+}
+
+.navbar-left-side-item:hover {
+    background-color: gray;    
+    transition: 0.2s ease-in-out;
+}
+
+/*
+.rotate {
+    transform: rotate(90deg);
+    transition: 0.2s ease-in-out;
+}
+
+.transition-effect1 {
+    transition: 0.1s ease-in-out;
+}
+
+.transition-effect2 {
+    transition: 0.2s ease-in-out;
+}
+
+.hamburger-click {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+*/
+
+
+
+@media only screen and (max-width: 768px) {
+    .menu-icon {
+        display: none;
+    }
+
+    #mainSidebar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 768px) {   
+    #uiMainSidebar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
