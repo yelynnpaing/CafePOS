@@ -15,6 +15,14 @@ body {
     font-size:19px;
 }
 
+.custom-navbar-nav {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
 .nav-font {
     font-size: 16px;
 }
@@ -35,6 +43,7 @@ body {
     transition: 0.2s ease-in-out;
 }
 
+
 @media only screen and (max-width: 768px) {
     .menu-icon {
         display: none;
@@ -46,8 +55,8 @@ body {
         align-items: center;
     }
 }
-/*991px*/
 
+/*991px*/
 @media screen and (max-width: 991px) {   
     #uiMainSidebar {
         display: flex;

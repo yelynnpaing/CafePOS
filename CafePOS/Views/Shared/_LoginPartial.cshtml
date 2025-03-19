@@ -2,11 +2,36 @@
 @inject SignInManager<Users> signInManager
 
 
-<ul class="navbar-nav ms-auto">
+
+<ul class="custom-navbar-nav ms-auto">
     @if (signInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
+        <li class="nav-item me-3">
+            @{
+                int CartCount = 0;
+                if(Context.Session.Get<OrderViewModel>("OrderViewModel") != null)
+                {
+                    OrderViewModel model = Context.Session.Get<OrderViewModel>("OrderViewModel");
+                    CartCount = model.OrderItems.Sum(item => item.Quantity);
+                }
+            }
+            <a class="nav-link position-relative" asp-action="Cart" asp-controller="Order">
+                <i class="bi bi-cart3 fw-bold"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded bg-danger">
+                    @CartCount
+                    <span class="visually-hidden">unread messages</span>
+                </span>
+            </a>
+        </li>
+        <li class="nav-item me-3 d-none d-md-block d-lg-block d-xl-block">
+            <div class="dropdown">
+                <button class="btn btn-secondary bg-white text-black border-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    @User.Identity!.Name
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item nav-link" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                </ul>
+            </div>
         </li>
     }
     else
@@ -18,4 +43,4 @@
             <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
         </li>
     }
-</u>
+</ul>

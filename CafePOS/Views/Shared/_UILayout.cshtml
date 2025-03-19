@@ -48,19 +48,14 @@
                 <div class="sticky-top">
                     <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow nav-font">
                         <div class="container-fluid">
-                            <div class="nav-item me-3">
+                            <div class="nav-item">
                                 <form asp-action="List" aps-controller="UIItem" method="get" class="d-flex">
                                     <input class="form-control pe-5 me-2" name="searchString" type="search" placeholder="Search item or others ... " aria-label="Search">
                                     <button type="submit" class="btn btn-outline-secondary btn-sm px-2 d-none d-md-block d-lg-block">Search</button>
                                 </form>                                
-                            </div>
-                            <div class="nab-item row ms-auto me-2">
-                                <a class="nav-link text-white btn btn-sm btn-primary" asp-area="" asp-controller="UIPanel" asp-action="Index">
-                                    <i class="bi bi-plus-circle-fill"></i>
-                                    <span class="ms-2 d-none d-md-inline d-lg-inline">Add Table</span>
-                                </a>
-                            </div>
-                        </div>
+                            </div>      
+                            <partial name="_LoginPartial" />
+                        </div>                        
                     </nav>                    
                 </div>
                 <div class="container-fluid">
