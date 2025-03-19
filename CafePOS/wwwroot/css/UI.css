@@ -35,30 +35,6 @@ body {
     transition: 0.2s ease-in-out;
 }
 
-/*
-.rotate {
-    transform: rotate(90deg);
-    transition: 0.2s ease-in-out;
-}
-
-.transition-effect1 {
-    transition: 0.1s ease-in-out;
-}
-
-.transition-effect2 {
-    transition: 0.2s ease-in-out;
-}
-
-.hamburger-click {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-*/
-
-
-
 @media only screen and (max-width: 768px) {
     .menu-icon {
         display: none;
@@ -70,11 +46,17 @@ body {
         align-items: center;
     }
 }
+/*991px*/
 
-@media only screen and (max-width: 768px) {   
+@media screen and (max-width: 991px) {   
     #uiMainSidebar {
         display: flex;
-        flex-direction: column;
+        flex-flow: column;
         align-items: center;
+    }
+    .navbar-brand-div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
