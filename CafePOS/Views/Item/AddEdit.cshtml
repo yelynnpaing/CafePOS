@@ -52,16 +52,9 @@
                         </div>
                         <div class="row mb-5">
                             <div class="col-md-12">
-                                <label class="form-label">Select Category</label>
-                                <select class="form-select" name="CatId">
-                                    @foreach (var category in ViewBag.Categories)
-                                    {                                        
-                                        bool isSelected = Model.CategoryId == category.CategoryId;
-                                        <option value="@category.CategoryId" id="@category.CategoryId"
-                                                selected="@(isSelected ? "selected" : "")">
-                                            @category.CatName
-                                        </option>
-                                    }
+                                <label class="form-label">Select Category</label>                                       
+                                <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="form-control" name="CatId">
+                                    <option>Select Category</option>
                                 </select>
                             </div>
                         </div>

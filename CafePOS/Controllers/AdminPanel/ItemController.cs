@@ -3,6 +3,7 @@ using CafePOS.Models;
 using CafePOS.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace CafePOS.Controllers.AdminPanel
@@ -33,9 +34,12 @@ namespace CafePOS.Controllers.AdminPanel
         [HttpGet]
         public async Task<IActionResult> AddEdit(Guid id)
         {
-            ViewBag.Categories = await categories.GetAllAsync();
-            if(id == Guid.Empty)
+            var CategoryList = await categories.GetAllAsync();
+            //ViewBag.Categories = await categories.GetAllAsync();
+            if (id == Guid.Empty)
             {
+                //ViewBag.Categories = await categories.GetAllAsync();
+                ViewBag.Categories = new SelectList(CategoryList, "CategoryId", "CatName");
                 ViewBag.Operation = "Item Add";
                 return View(new Item());
             }
@@ -45,6 +49,7 @@ namespace CafePOS.Controllers.AdminPanel
                 {
                     Includes = "Category"
                 });
+                ViewBag.Categories = new SelectList(CategoryList, "CategoryId", "CatName", item.CategoryId);
                 ViewBag.Operation = "Item Edit";
                 ViewData["ImageUrl"] = item.ImageUrl;
                 return View(item);
@@ -129,6 +134,7 @@ namespace CafePOS.Controllers.AdminPanel
                 {
                     existingItem.ImageUrl = newImageUrl;
                 }
+                //existingItem.CategoryId = CatId;
                 existingItem.CategoryId = CatId;
                 existingItem.UpdatedAt = DateTime.Now;
                 try
