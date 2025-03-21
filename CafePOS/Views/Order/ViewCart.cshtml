@@ -1,0 +1,69 @@
+﻿@model OrderViewModel
+
+
+@{
+    ViewBag.Title = "View Cart";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<div class="container-fludi">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="mt-4">
+                <h5 class="mb-3 fw-bold">View Items in Cart</h5>
+                <form asp-action="PlaceOrder" method="post">                    
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Item Price</th>
+                                <th>Item Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.OrderItems.Count(); i++)
+                            {
+                                <tr>
+                                    <td>@Model.OrderItems[i].ItemName</td>
+                                    <td>@Model.OrderItems[i].Price</td>
+                                    <td>@Model.OrderItems[i].Quantity</td>
+                                    <td></td>
+                                </tr>
+                            }
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-primary text-white fw-bold">@Model.TotalAmount - MMK</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-5 mb-3">
+                        <h6>To Place Order, Please Fill the followings : </h6>
+                    </div>
+                    <div class="border p-3">
+                        <div class="mb-3">
+                            <label>Order Type : </label>
+                            <select class="form-select" id="OrderType" name="OrderType">
+                                <option value="DineIn">DineIn</option>
+                                <option value="TakeAway">TakeAway</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Order Status : </label>
+                            <select class="form-select" id="OrderStatus" name="OrderStatus">
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="">
+                            <label>Table Number : </label>
+                            <input type="text" name="TableNumber" class="form-control" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

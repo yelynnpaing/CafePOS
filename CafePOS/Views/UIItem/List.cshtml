@@ -10,6 +10,12 @@
             <div class="row align-items-center">
                 <div class="d-flex align-items-center">
                     <h5>Available Items</h5>
+                    <div class="ms-3">
+                        <form asp-action="List" aps-controller="UIItem" method="get" class="d-flex">
+                            <input class="form-control pe-5 me-2" name="searchString" type="search" placeholder="Search item or others ... " aria-label="Search">
+                            <button type="submit" class="btn btn-outline-secondary btn-sm px-2 d-none d-md-block d-lg-block">Search</button>
+                        </form>
+                    </div>
                     <div class="ms-3 d-flex">
                         <form asp-action="List" asp-controller="UIItem" method="get">
                             <select name="CategoryId" class="form-select" onchange="this.form.submit()">
@@ -23,6 +29,7 @@
                             </select>
                         </form>
                     </div>
+                    
                 </div>                            
                <div>
                     <hr class="mb-3" />
@@ -48,7 +55,10 @@
                                         <h6 class="card-title">@item.ItemName</h6>
                                         <div class="d-flex justify-content-between align-items-center mt-3">
                                             <p class="card-text fw-bold text-black-50 mb-0">Ks @item.Price</p>
-                                            <a asp-controller="UIItemOrder" asp-action="Order" class="d-inline-block card-text btn btn-sm btn-secondary">Order</a>
+                                            <!--
+                                                <a asp-controller="UIItemOrder" asp-action="Order" class="d-inline-block card-text btn btn-sm btn-secondary">Order</a>
+                                            -->
+                                            <small class="card-text">InStock - @item.StockQuantity</small>
                                         </div>
                                     </div>
                                 </div>
