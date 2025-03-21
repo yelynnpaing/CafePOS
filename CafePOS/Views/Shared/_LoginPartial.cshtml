@@ -6,7 +6,7 @@
 <ul class="custom-navbar-nav ms-auto">
     @if (signInManager.IsSignedIn(User))
     {
-        <li class="nav-item me-3">
+        <li class="nav-item me-3 my-1">
             @{
                 int CartCount = 0;
                 if(Context.Session.Get<OrderViewModel>("OrderViewModel") != null)

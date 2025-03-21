@@ -1,10 +1,12 @@
 ﻿using CafePOS.Data;
 using CafePOS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata.Ecma335;
 
 namespace CafePOS.Controllers.AdminPanel
 {
+    [Authorize]
     [Route("admin/category")]
     public class CategoryController : Controller
     {
@@ -13,14 +15,14 @@ namespace CafePOS.Controllers.AdminPanel
         {
             categories = new Repository<Category>(context);
         }
-
+      
         [Route("index")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await categories.GetAllAsync());
         }
-
+                
         [Route("create")]
         [HttpGet]
         public IActionResult Create()

@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CafePOS.Controllers.UI
 {
-    [Route("mm-cafe")]
+    [Authorize]
+    [Route("mm-cafe/")]
     public class UIPanelController : Controller
-    {
+    {        
         [Route("home")]
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Home()
         {
             return View();
         }

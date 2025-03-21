@@ -18,7 +18,7 @@
                     <nav class="navbar border-bottom nav-font">
                         <div class="container-fluid">
                             <div class="row mx-auto">
-                                <a class="navbar-brand navbar-brand-font fw-bold navbar-brand-div " asp-area="" asp-controller="UIPanel" asp-action="Index">
+                                <a class="navbar-brand navbar-brand-font fw-bold navbar-brand-div my-1" asp-area="" asp-controller="UIPanel" asp-action="Home">
                                     <i class="bi bi-cup-hot-fill"></i>
                                     <span class="d-none d-lg-inline">MM Cafe</span>
                                 </a>
@@ -35,12 +35,12 @@
                         <a href="/mm-cafe/order/create" class="nav-link text-black navbar-left-side-item fw-bold">
                             <i class="bi bi-card-checklist sidebar-icon"></i><span class="d-none d-lg-inline ms-2 side-label">Create Order</span>
                         </a>
-                        <a href="#" class="nav-link icon-link-hover text-black navbar-left-side-item fw-bold">
-                            <i class="bi bi-credit-card sidebar-icon"></i><span class="d-none d-lg-inline ms-2 side-label">Payment</span>
-                        </a>
-                        <a href="#" class="nav-link text-black navbar-left-side-item fw-bold">
-                            <i class="bi bi-cash-coin sidebar-icon"></i><span class="d-none d-lg-inline ms-2 side-label">Order</span>
-                        </a>
+                        <a href="/mm-cafe/order/view" class="nav-link text-black navbar-left-side-item fw-bold">
+                            <i class="bi bi-cash-coin sidebar-icon"></i><span class="d-none d-lg-inline ms-2 side-label">View Order</span>
+                        </a>                        
+                        <a href="/admin/dashboard" target="_blank" class="nav-link icon-link-hover text-black navbar-left-side-item fw-bold ms-auto">
+                            <i class="bi bi-person-fill-gear sidebar-icon"></i><span class="d-none d-lg-inline ms-2 side-label">Admin Panel</span>
+                        </a>                                             
                     </nav>
                 </div>
             </div>

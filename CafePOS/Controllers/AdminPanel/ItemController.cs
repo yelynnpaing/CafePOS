@@ -1,11 +1,13 @@
 ﻿using CafePOS.Data;
 using CafePOS.Models;
 using CafePOS.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace CafePOS.Controllers.AdminPanel
 {
+    [Authorize]
     [Route("admin/item")]
     public class ItemController : Controller
     {

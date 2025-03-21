@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CafePOS.Models.Order>
+@{
+    ViewBag.Title = "Order View";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mt-5">
+            <h5 class="fw-bold">Order List</h5>
+            <hr class="mb-3" />
+            <div>
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Order Id</th>
+                            <th>Order Date</th>
+                            <th>Table Number</th>
+                            <th>Total Price</th>
+                            <th>Order Items</th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var order in Model)
+                        {
+                            <tr>
+                                <td>@order.OrderId</td>
+                                <td>@order.CreatedAt</td>
+                                <td>@order.TableNumber</td>
+                                <td>@order.TotalAmount</td>
+                                <td>
+                                    @foreach(var item in order.OrderItems)
+                                    {
+                                        <p>@item.Item.ItemName - @item.Quantity * @item.UnitPrice MMK</p>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -32,9 +32,23 @@ namespace CafePOS.Models
             return await _dbset.ToListAsync();
         }
 
-        public Task<IEnumerable<T>> GetAllByIdAsync<TKey>(TKey id, string propertyName, QueryOptions<T> options)
+        public async Task<IEnumerable<T>> GetAllByIdAsync<TKey>(TKey id, string propertyName, QueryOptions<T> options)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = _dbset;
+            if (options.HasWhere)
+            {
+                query = query.Where(options.Where);
+            }
+            if (options.HasOrderBy)
+            {
+                query = query.OrderBy(options.OrderBy);
+            }
+            foreach(string include in options.GetIncludes())
+            {
+                query = query.Include(include);
+            }
+            query = query.Where(e => EF.Property<TKey>(e, propertyName).Equals(id));
+            return await query.ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(Guid id, QueryOptions<T> options)

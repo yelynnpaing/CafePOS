@@ -27,7 +27,7 @@ namespace CafePOS.Controllers
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "UIPanel");
+                    return RedirectToAction("Home", "UIPanel");
                 }
                 else
                 {
@@ -144,7 +144,7 @@ namespace CafePOS.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Home", "UIPanel");
         }
     }
 }

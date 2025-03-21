@@ -15,15 +15,15 @@ namespace CafePOS.Controllers.UI
         private Repository<Item> _items;
         private Repository<Order> _orders;
         private Repository<Category> _categories;
-        private readonly UserManager<Users> _users;
+        private readonly UserManager<Users> _userManager;
 
-        public OrderController(AppDbContext context, UserManager<Users> users)
+        public OrderController(AppDbContext context, UserManager<Users> userManager)
         {
             _context = context;
             _items = new Repository<Item>(context);
             _orders = new Repository<Order>(context);
             _categories = new Repository<Category>(context);
-            _users = users;
+            _userManager = userManager;
         }
 
         [Authorize]
@@ -96,6 +96,59 @@ namespace CafePOS.Controllers.UI
             }
             return View(model);
         }
+
+        [Authorize]
+        [Route("placeOrder")]
+        [HttpPost]
+        public async Task<IActionResult> PlaceOrder(string orderType, string orderStatus, int tableNumber)
+        {
+            var model = HttpContext.Session.Get<OrderViewModel>("OrderViewModel");
+            if(model == null || model.OrderItems.Count == 0)
+            {
+                return RedirectToAction("Create");
+            }
+
+            //create a new order entity
+            Order order = new Order
+            {
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                OrderType = orderType,
+                OrderStatus = orderStatus,
+                TableNumber = tableNumber,
+                TotalAmount = model.TotalAmount,
+                UserId = Guid.Parse(_userManager.GetUserId(User))
+            };
+            //add order items into order entity
+            foreach(var item in model.OrderItems)
+            {
+                order.OrderItems.Add(new OrderItem
+                {
+                    ItemId = item.ItemId,                    
+                    Quantity = item.Quantity,
+                    UnitPrice = item.Price
+                });
+            }
+            //save order entity to the database
+            await _orders.AddAsync(order);
+            HttpContext.Session.Remove("OrderViewModel");
+            return RedirectToAction("View");
+        }
+
+        [Authorize]
+        [Route("view")]
+        [HttpGet]
+        public async Task<IActionResult> View()
+        {
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+            var userOrders = await _orders.GetAllByIdAsync(userId, "UserId", new QueryOptions<Order>
+            {
+                Includes = "OrderItems.Item"
+            });
+
+            return View(userOrders);
+        }
+
     }
 }
 

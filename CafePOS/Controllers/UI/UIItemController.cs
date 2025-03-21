@@ -1,9 +1,11 @@
 ﻿using CafePOS.Data;
 using CafePOS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CafePOS.Controllers.UI
 {
+
     [Route("mm-cafe/items/")]
     public class UIItemController : Controller
     {
@@ -16,7 +18,7 @@ namespace CafePOS.Controllers.UI
             _categories = new Repository<Category>(context);
         }
 
-
+        [Authorize]
         [Route("list")]
         [HttpGet]
         public async Task<IActionResult> List(string searchString, Guid? CategoryId)
