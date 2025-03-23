@@ -58,7 +58,21 @@
                                             <!--
                                                 <a asp-controller="UIItemOrder" asp-action="Order" class="d-inline-block card-text btn btn-sm btn-secondary">Order</a>
                                             -->
-                                            <small class="card-text">InStock - @item.StockQuantity</small>
+                                            @if(@item.StockQuantity > 0)
+                                            {
+                                                <small class="card-text">InStock - @item.StockQuantity</small>
+                                            }
+                                            else
+                                            {
+                                                @if(item.IsAvailable)
+                                                {
+                                                    <small class="card-text">Available</small>
+                                                }
+                                                else
+                                                {
+                                                    <small class="card-text">Not Available</small>
+                                                }
+                                            }
                                         </div>
                                     </div>
                                 </div>

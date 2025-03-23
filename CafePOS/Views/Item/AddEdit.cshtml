@@ -50,13 +50,21 @@
                                 <img src="@Url.Content("~/images/"+ ViewData["ImageUrl"])" style="width:100px; height:100px" class="mt-2" />
                             }                            
                         </div>
-                        <div class="row mb-5">
+                        <div class="row mb-3">
                             <div class="col-md-12">
                                 <label class="form-label">Select Category</label>                                       
                                 <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="form-control" name="CatId">
                                     <option>Select Category</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="mb-3 d-flex">
+                            <input type="checkbox" asp-for="TodaySpecial" name="TodaySpecial" id="TodaySpecial" class="form-check-input" />
+                            <label class="form-label ms-2 d-block" for="TodaySpecial">Today Special</label>                            
+                        </div>
+                        <div class="mb-5 d-flex">
+                            <input type="checkbox" asp-for="IsAvailable" name="IsAvailable" id="IsAvailable" class="form-check-input" />
+                            <label class="form-label ms-2 d-block" for="IsAvailable">IsAvailable</label>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary me-3">Save</button>

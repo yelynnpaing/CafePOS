@@ -2,14 +2,16 @@
 using CafePOS.Models;
 using CafePOS.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.SignalR.Protocol;
 
+
 namespace CafePOS.Controllers.AdminPanel
 {
     [Authorize]
-    [Route("admin/item")]
+    [Route("admin/item/")]
     public class ItemController : Controller
     {
         private Repository<Item> items;
@@ -26,7 +28,7 @@ namespace CafePOS.Controllers.AdminPanel
         [Route("list")]
         [HttpGet]
         public async Task<IActionResult> Items()
-        {
+        {           
             return View(await items.GetAllAsync());
         }
 
@@ -126,6 +128,8 @@ namespace CafePOS.Controllers.AdminPanel
                 existingItem.Description = item.Description;
                 existingItem.Price = item.Price;
                 existingItem.StockQuantity = item.StockQuantity;
+                existingItem.TodaySpecial = item.TodaySpecial;
+                existingItem.IsAvailable = item.IsAvailable;
                 if(newImageUrl == "")
                 {
                     existingItem.ImageUrl = oldImageUrl;

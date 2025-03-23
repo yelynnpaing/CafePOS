@@ -23,9 +23,11 @@ namespace CafePOS.Models
         [ValidateNever]
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
-        [Required]
+        [ValidateNever]
         public int StockQuantity { get; set; }
-        public bool IsAvailable { get; set; } 
+        public bool IsAvailable { get; set; }
+        [ValidateNever]
+        public bool TodaySpecial { get; set; }
         public  DateTime CreatedAt {get; set;}
         public DateTime UpdatedAt { get; set; }
         [ValidateNever]

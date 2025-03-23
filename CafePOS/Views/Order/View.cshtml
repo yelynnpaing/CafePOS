@@ -17,7 +17,8 @@
                             <th>Order Date</th>
                             <th>Table Number</th>
                             <th>Total Price</th>
-                            <th>Order Items</th>                            
+                            <th>Order Items</th>       
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +34,10 @@
                                     {
                                         <p>@item.Item.ItemName - @item.Quantity * @item.UnitPrice MMK</p>
                                     }
+                                </td>
+                                <td>
+                                    <a asp-action="EditOrder" asp-route-id="@order.OrderId" class="btn btn-sm btn-info text-white mb-2">Edit</a>
+                                    <a asp-action="MakePayment" asp-route-id="@order.OrderId" class="btn btn-sm btn-secondary text-white">Payment</a>
                                 </td>
                             </tr>
                         }

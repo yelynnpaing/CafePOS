@@ -8,6 +8,6 @@
         public Guid ItemId { get; set; }
         public Item? Item { get; set; }
         public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }        
+        public decimal UnitPrice { get; set; }               
     }
 }

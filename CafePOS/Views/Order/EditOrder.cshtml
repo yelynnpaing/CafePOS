@@ -1,0 +1,75 @@
+﻿@model Order
+@{
+    ViewBag.Title = "Edit Order";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<div class="container-fludi">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="mt-4">
+                <h5 class="mb-3 fw-bold text-decoration-underline">Edit Order</h5>
+                <form asp-action="UpdateOrder" method="post">
+                    <input type="hidden" asp-for="@Model.OrderId"/>
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Actions</th>
+                                <th>Item Name</th>
+                                <th>Item Price</th>
+                                <th>Item Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model.OrderItems)
+                            {
+                                <tr>
+                                    <td>
+                                        <form asp-action="RemoveOrderItem" asp-route-orderId="@Model.OrderId" asp-route-itemId="@item.OrderItemId" method="post">
+                                            <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                                        </form>
+                                    </td>
+                                    <td>@item.Item.ItemName</td>
+                                    <td>@item.UnitPrice</td>
+                                    <td>@item.Quantity</td>
+                                    <td></td>
+                                </tr>
+                            }
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="bg-primary text-white fw-bold">@Model.TotalAmount - MMK</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-5 mb-3">
+                        <h6>To Place Order, Please Fill the followings : </h6>
+                    </div>
+                    <div class="border p-3">
+                        <div class="mb-3">
+                            <label>Order Type : </label>
+                            <select class="form-select" id="orderType" name="orderType">
+                                <option value="DineIn">DineIn</option>
+                                <option value="TakeAway">TakeAway</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Order Status : </label>
+                            <select class="form-select" id="orderStatus" name="orderStatus">
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="">
+                            <label>Table Number : </label>
+                            <input type="text" asp-for="TableNumber" name="tableNumber" class="form-control" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Update Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

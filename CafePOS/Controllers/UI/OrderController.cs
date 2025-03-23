@@ -1,19 +1,23 @@
 ﻿using CafePOS.Data;
 using CafePOS.Models;
+using CafePOS.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using System.Reflection.Metadata.Ecma335;
 
 namespace CafePOS.Controllers.UI
 {
+    [Authorize]
     [Route("mm-cafe/order/")]
     public class OrderController : Controller
     {
         private readonly AppDbContext _context;
         private Repository<Item> _items;
         private Repository<Order> _orders;
+        private Repository<OrderItem> _orderItems;
         private Repository<Category> _categories;
         private readonly UserManager<Users> _userManager;
 
@@ -22,6 +26,7 @@ namespace CafePOS.Controllers.UI
             _context = context;
             _items = new Repository<Item>(context);
             _orders = new Repository<Order>(context);
+            _orderItems = new Repository<OrderItem>(context);
             _categories = new Repository<Category>(context);
             _userManager = userManager;
         }
@@ -38,8 +43,7 @@ namespace CafePOS.Controllers.UI
             };
             return View(model);
         }
-
-        [Authorize]
+        
         [Route("addItem")]
         [HttpPost]
         public async Task<IActionResult> AddItem(Guid itemId, int itemQty)
@@ -84,7 +88,6 @@ namespace CafePOS.Controllers.UI
             return RedirectToAction("Create", model);
         }
 
-        [Authorize]
         [Route("viewCart")]
         [HttpGet]
         public IActionResult ViewCart()
@@ -96,8 +99,7 @@ namespace CafePOS.Controllers.UI
             }
             return View(model);
         }
-
-        [Authorize]
+        
         [Route("placeOrder")]
         [HttpPost]
         public async Task<IActionResult> PlaceOrder(string orderType, string orderStatus, int tableNumber)
@@ -135,7 +137,6 @@ namespace CafePOS.Controllers.UI
             return RedirectToAction("View");
         }
 
-        [Authorize]
         [Route("view")]
         [HttpGet]
         public async Task<IActionResult> View()
@@ -148,6 +149,25 @@ namespace CafePOS.Controllers.UI
 
             return View(userOrders);
         }
+
+        [Route("editOrder")]
+        [HttpGet]
+        public async Task<IActionResult> EditOrder(Guid id)
+        {
+            var order = await _orders.GetByIdAsync(id, new QueryOptions<Order> { Includes = "OrderItems, OrderItems.Item" });            
+            return View(order);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveOrderItem(Guid orderId, Guid itemId)
+        {
+            var order = await _orders.GetByIdAsync(orderId, new QueryOptions<Order> { Includes = "OrderItems, OrderItems.Item" });
+            var orderItem = order.OrderItems.FirstOrDefault(oi => oi.OrderItemId == itemId);
+
+            order.OrderItems.Remove(orderItem);            
+            await _orderItems.DeleteAsync(orderItem.OrderItemId);
+            return RedirectToAction("EditOrder");
+        }        
 
     }
 }
