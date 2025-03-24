@@ -26,9 +26,15 @@
                             {
                                 <tr>
                                     <td>
+                                        <!--
                                         <form asp-action="RemoveOrderItem" asp-route-orderId="@Model.OrderId" asp-route-itemId="@item.OrderItemId" method="post">
                                             <button type="submit" class="btn btn-sm btn-danger">Remove</button>
-                                        </form>
+                                        </form>                                   
+                                        -->
+                                        <a asp-action="RemoveOrderItem" asp-route-orderId="@Model.OrderId" asp-route-itemId="@item.OrderItemId" method="post"
+                                        class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to remove')">
+                                            Remove
+                                        </a>
                                     </td>
                                     <td>@item.Item.ItemName</td>
                                     <td>@item.UnitPrice</td>
@@ -73,3 +79,4 @@
         </div>
     </div>
 </div>
+

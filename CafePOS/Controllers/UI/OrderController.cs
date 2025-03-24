@@ -158,7 +158,8 @@ namespace CafePOS.Controllers.UI
             return View(order);
         }
 
-        [HttpPost]
+        
+        [HttpGet]
         public async Task<IActionResult> RemoveOrderItem(Guid orderId, Guid itemId)
         {
             var order = await _orders.GetByIdAsync(orderId, new QueryOptions<Order> { Includes = "OrderItems, OrderItems.Item" });
@@ -166,7 +167,9 @@ namespace CafePOS.Controllers.UI
 
             order.OrderItems.Remove(orderItem);            
             await _orderItems.DeleteAsync(orderItem.OrderItemId);
-            return RedirectToAction("EditOrder");
+            order.TotalAmount = order.TotalAmount - (orderItem.UnitPrice * orderItem.Quantity);
+            await _orders.UpdateAsync(order);
+            return RedirectToAction("View");
         }        
 
     }
