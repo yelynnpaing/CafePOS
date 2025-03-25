@@ -4,6 +4,7 @@ using CafePOS.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CafePOS.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250324150433_update-cafe-table")]
+    partial class updatecafetable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,23 +24,6 @@ namespace CafePOS.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CafePOS.Models.CafeTable", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Note")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TableNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("cafeTables");
-                });
 
             modelBuilder.Entity("CafePOS.Models.Category", b =>
                 {
@@ -126,9 +112,6 @@ namespace CafePOS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CafeTableId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -156,8 +139,6 @@ namespace CafePOS.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("OrderId");
-
-                    b.HasIndex("CafeTableId");
 
                     b.HasIndex("UsersId");
 
@@ -406,10 +387,6 @@ namespace CafePOS.Migrations
 
             modelBuilder.Entity("CafePOS.Models.Order", b =>
                 {
-                    b.HasOne("CafePOS.Models.CafeTable", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("CafeTableId");
-
                     b.HasOne("CafePOS.Models.Users", null)
                         .WithMany("Orders")
                         .HasForeignKey("UsersId");
@@ -483,11 +460,6 @@ namespace CafePOS.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CafePOS.Models.CafeTable", b =>
-                {
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("CafePOS.Models.Category", b =>

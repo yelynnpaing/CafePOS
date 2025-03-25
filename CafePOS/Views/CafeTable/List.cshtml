@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CafeTable>
+@{
+    ViewBag.Title = "Table List";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="mb-5">
+                <h5 class="fw-bold text-decoration-underline">Table List</h5>
+                <hr />
+            </div>
+            <div class="border p-3">
+                <div class="d-flex justify-content-end mb-3">
+                    <a asp-action="AddEdit" class="btn btn-primary">New Table</a>
+                </div>
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Table Id</th>
+                            <th>Table Number</th>
+                            <th>Table Notes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var table in Model)
+                        {
+                            <tr>
+                                <td>@table.Id</td>
+                                <td>@table.TableNumber</td>
+                                <td>@table.Note</td>
+                                <td>
+                                    <a asp-action="AddEdit" asp-route-id="@table.Id" class="btn btn-sm btn-info me-1 mb-1">
+                                        <i class="bi bi-pencil-fill me-1"></i>
+                                        Edit
+                                    </a>
+                                    <a asp-controller="CafeTable" asp-action="Delete" asp-route-id="@table.Id" class="btn btn-sm btn-danger"
+                                       onclick="return confirm('Are you sure want to delete ? ')">
+                                        <i class="bi bi-trash me-1"></i>
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

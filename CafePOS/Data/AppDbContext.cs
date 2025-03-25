@@ -19,6 +19,7 @@ namespace CafePOS.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<CafeTable> cafeTables { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
