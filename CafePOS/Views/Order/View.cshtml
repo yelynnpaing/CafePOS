@@ -27,7 +27,15 @@
                             <tr>
                                 <td>@order.OrderId</td>
                                 <td>@order.CreatedAt</td>                                
-                                <td>TableId</td>
+                                <td class="text-center">
+                                    @foreach(var cafeTable in ViewBag.CafeTables)
+                                    {
+                                        if (@cafeTable.CafeTableId == @order.CafeTableId)
+                                        {
+                                            <span>@cafeTable.TableNumber</span>
+                                        }
+                                    }
+                                </td>
                                 <td>@order.TotalAmount</td>
                                 <td>
                                     @foreach(var item in order.OrderItems)
@@ -36,7 +44,7 @@
                                     }
                                 </td>
                                 <td>
-                                    <a asp-action="EditOrder" asp-route-id="@order.OrderId" class="btn btn-sm btn-info text-white mb-2">Edit</a>
+                                    <a asp-action="EditOrder" asp-route-id="@order.OrderId" class="btn btn-sm btn-info text-white">Edit</a>
                                     <a asp-action="MakePayment" asp-route-id="@order.OrderId" class="btn btn-sm btn-secondary text-white">Payment</a>
                                 </td>
                             </tr>

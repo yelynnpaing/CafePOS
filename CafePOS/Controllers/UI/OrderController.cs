@@ -153,6 +153,7 @@ namespace CafePOS.Controllers.UI
             {
                 Includes = "OrderItems.Item"
             });
+            ViewBag.CafeTables = await _cafeTables.GetAllAsync();
 
             return View(userOrders);
         }
@@ -179,7 +180,22 @@ namespace CafePOS.Controllers.UI
             order.TotalAmount = order.TotalAmount - (orderItem.UnitPrice * orderItem.Quantity);
             await _orders.UpdateAsync(order);
             return RedirectToAction("View");
-        }        
+        }
+
+        [Route("updateOrder")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateOrder(Guid OrderId, string orderType, string orderStatus, Guid cafeTableId)
+        {
+            var model = await _orders.GetByIdAsync(OrderId, new QueryOptions<Order> { Includes = "OrderItems, OrderItems.Item, CafeTable" });
+            if (model is null) return NotFound();
+            model.UpdatedAt = DateTime.Now;
+            model.OrderType = orderType;
+            model.OrderStatus = orderStatus;
+            model.CafeTableId = cafeTableId;
+
+            await _orders.UpdateAsync(model);            
+            return RedirectToAction("View");
+        }
 
     }
 }
