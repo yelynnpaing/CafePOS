@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<CafeTable>
+@{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
@@ -8,11 +9,34 @@
         <div class="col-md-12">
             <div class="mt-3">
                 <div class="mb-3">
-                    <h5 class="text-decoration-underline">POS Home Page</h5>
+                    <h5 class="text-decoration-underline fw-bold">Table List</h5>
                     <hr />
                 </div>
-                
             </div>
+        </div>
+        <div class="col-md-12">
+            <div class="p-3 row">
+                @foreach (var cTable in Model)
+                {
+                    <div class="col-md-2 mb-5">
+                        <div class="circle">
+                            <h5>@cTable.TableNumber</h5>
+                        </div>
+                    </div>
+                }
+            </div>
+            <hr />
+        </div>
+        <div class="col-md-12">
+            <div class="mt-3">
+                <div class="mb-3">
+                    <h5 class="text-decoration-underline fw-bold">Today Special Menu</h5>
+                    <hr />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+
         </div>
     </div>
 </div>
