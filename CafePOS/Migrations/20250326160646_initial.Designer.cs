@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CafePOS.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250305155504_init")]
-    partial class init
+    [Migration("20250326160646_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,23 @@ namespace CafePOS.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CafePOS.Models.CafeTable", b =>
+                {
+                    b.Property<Guid>("CafeTableId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TableNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("CafeTableId");
+
+                    b.ToTable("cafeTables");
+                });
 
             modelBuilder.Entity("CafePOS.Models.Category", b =>
                 {
@@ -93,6 +110,9 @@ namespace CafePOS.Migrations
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
+                    b.Property<bool>("TodaySpecial")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -109,6 +129,9 @@ namespace CafePOS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CafeTableId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -116,11 +139,9 @@ namespace CafePOS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("OrderType")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("TableNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
@@ -135,6 +156,8 @@ namespace CafePOS.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("OrderId");
+
+                    b.HasIndex("CafeTableId");
 
                     b.HasIndex("UsersId");
 
@@ -155,9 +178,6 @@ namespace CafePOS.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("Subtotal")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,2)");
@@ -375,24 +395,34 @@ namespace CafePOS.Migrations
 
             modelBuilder.Entity("CafePOS.Models.Item", b =>
                 {
-                    b.HasOne("CafePOS.Models.Category", null)
+                    b.HasOne("CafePOS.Models.Category", "Category")
                         .WithMany("Items")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("CafePOS.Models.Order", b =>
                 {
+                    b.HasOne("CafePOS.Models.CafeTable", "CafeTable")
+                        .WithMany("Orders")
+                        .HasForeignKey("CafeTableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CafePOS.Models.Users", null)
                         .WithMany("Orders")
                         .HasForeignKey("UsersId");
+
+                    b.Navigation("CafeTable");
                 });
 
             modelBuilder.Entity("CafePOS.Models.OrderItem", b =>
                 {
                     b.HasOne("CafePOS.Models.Item", "Item")
-                        .WithMany()
+                        .WithMany("OrderItems")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -459,9 +489,19 @@ namespace CafePOS.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("CafePOS.Models.CafeTable", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("CafePOS.Models.Category", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("CafePOS.Models.Item", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("CafePOS.Models.Order", b =>

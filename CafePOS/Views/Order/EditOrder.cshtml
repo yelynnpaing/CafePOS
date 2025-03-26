@@ -70,7 +70,11 @@
                         </div>
                         <div class="">
                             <label>Table Number : </label>
-                            <input type="text" asp-for="TableNumber" name="tableNumber" class="form-control" />
+                            <!-- 
+                            <input type="text" asp-for="TableNumber" name="tableNumber" class="form-control" /> -->
+                            <select asp-for="CafeTableId" asp-items="@ViewBag.CafeTables" id="cafeTableId" class="form-control">
+                                <option>Select Table Number</option>
+                            </select>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Update Order</button>

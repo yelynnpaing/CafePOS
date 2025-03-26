@@ -6,7 +6,8 @@ namespace CafePOS.Models
 {
     public class CafeTable
     {
-        public Guid Id { get; set; }
+        [Key]
+        public Guid CafeTableId { get; set; }
         [Required]
         public int TableNumber { get; set; }
         [ValidateNever]          

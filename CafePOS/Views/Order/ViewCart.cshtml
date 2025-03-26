@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="mt-4">
-                <h5 class="mb-3 fw-bold">View Items in Cart</h5>
+                <h5 class="mb-3 fw-bold text-decoration-underline">View Items in Cart</h5>
                 <form asp-action="PlaceOrder" method="post">                    
                     <table class="table table-responsive">
                         <thead>
@@ -57,8 +57,12 @@
                             </select>
                         </div>
                         <div class="">
-                            <label>Table Number : </label>
-                            <input type="text" name="tableNumber" class="form-control" />
+                            <label>Table Number <span class="text-danger">( Choose Rquire )</span> </label>
+                            <!-- 
+                            <input type="text" name="tableNumber" class="form-control"/> -->
+                            <select asp-items="@ViewBag.CafeTables" class="form-control" name="cafeTableId">
+                                <option>Select Table Number</option>
+                             </select>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Place Order</button>

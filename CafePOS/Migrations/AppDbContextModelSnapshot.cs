@@ -24,7 +24,7 @@ namespace CafePOS.Migrations
 
             modelBuilder.Entity("CafePOS.Models.CafeTable", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("CafeTableId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -34,7 +34,7 @@ namespace CafePOS.Migrations
                     b.Property<int>("TableNumber")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CafeTableId");
 
                     b.ToTable("cafeTables");
                 });
@@ -126,7 +126,7 @@ namespace CafePOS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CafeTableId")
+                    b.Property<Guid>("CafeTableId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -139,9 +139,6 @@ namespace CafePOS.Migrations
                     b.Property<string>("OrderType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TableNumber")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
@@ -406,13 +403,17 @@ namespace CafePOS.Migrations
 
             modelBuilder.Entity("CafePOS.Models.Order", b =>
                 {
-                    b.HasOne("CafePOS.Models.CafeTable", null)
+                    b.HasOne("CafePOS.Models.CafeTable", "CafeTable")
                         .WithMany("Orders")
-                        .HasForeignKey("CafeTableId");
+                        .HasForeignKey("CafeTableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CafePOS.Models.Users", null)
                         .WithMany("Orders")
                         .HasForeignKey("UsersId");
+
+                    b.Navigation("CafeTable");
                 });
 
             modelBuilder.Entity("CafePOS.Models.OrderItem", b =>

@@ -43,7 +43,7 @@ namespace CafePOS.Controllers.AdminPanel
         [HttpPost]
         public async Task<IActionResult> AddEdit(CafeTable cafeTable, Guid id)
         {
-            if(cafeTable.Id == Guid.Empty)
+            if(cafeTable.CafeTableId == Guid.Empty)
             {
                 try
                 {
@@ -80,7 +80,7 @@ namespace CafePOS.Controllers.AdminPanel
         {
             var table = await _cafeTables.GetByIdAsync(id, new QueryOptions<CafeTable> { Includes = "Orders" });
             if (table is null) return NotFound();
-            await _cafeTables.DeleteAsync(table.Id);
+            await _cafeTables.DeleteAsync(table.CafeTableId);
             return RedirectToAction("List");
         }
     }

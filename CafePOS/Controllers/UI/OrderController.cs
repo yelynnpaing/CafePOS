@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using System.Reflection.Metadata.Ecma335;
 
@@ -19,6 +20,7 @@ namespace CafePOS.Controllers.UI
         private Repository<Order> _orders;
         private Repository<OrderItem> _orderItems;
         private Repository<Category> _categories;
+        private Repository<CafeTable> _cafeTables;
         private readonly UserManager<Users> _userManager;
 
         public OrderController(AppDbContext context, UserManager<Users> userManager)
@@ -28,6 +30,7 @@ namespace CafePOS.Controllers.UI
             _orders = new Repository<Order>(context);
             _orderItems = new Repository<OrderItem>(context);
             _categories = new Repository<Category>(context);
+            _cafeTables = new Repository<CafeTable>(context);
             _userManager = userManager;
         }
 
@@ -90,19 +93,22 @@ namespace CafePOS.Controllers.UI
 
         [Route("viewCart")]
         [HttpGet]
-        public IActionResult ViewCart()
+        public async Task<IActionResult> ViewCart()
         {
+            var TableList = await _cafeTables.GetAllAsync();
+            ViewBag.CafeTables = new SelectList(TableList, "CafeTableId", "TableNumber");
             var model = HttpContext.Session.Get<OrderViewModel>("OrderViewModel");
             if(model == null || model.OrderItems.Count == 0)
             {
                 return RedirectToAction("Create");
             }
+
             return View(model);
         }
         
         [Route("placeOrder")]
         [HttpPost]
-        public async Task<IActionResult> PlaceOrder(string orderType, string orderStatus, int tableNumber)
+        public async Task<IActionResult> PlaceOrder(string orderType, string orderStatus, Guid cafeTableId)
         {
             var model = HttpContext.Session.Get<OrderViewModel>("OrderViewModel");
             if(model == null || model.OrderItems.Count == 0)
@@ -117,7 +123,8 @@ namespace CafePOS.Controllers.UI
                 UpdatedAt = DateTime.Now,
                 OrderType = orderType,
                 OrderStatus = orderStatus,
-                TableNumber = tableNumber,
+                CafeTableId = cafeTableId,
+                //TableNumber = tableNumber,
                 TotalAmount = model.TotalAmount,
                 UserId = Guid.Parse(_userManager.GetUserId(User))
             };
@@ -154,6 +161,8 @@ namespace CafePOS.Controllers.UI
         [HttpGet]
         public async Task<IActionResult> EditOrder(Guid id)
         {
+            var TableList = await _cafeTables.GetAllAsync();
+            ViewBag.CafeTables = new SelectList(TableList, "CafeTableId", "TableNumber");
             var order = await _orders.GetByIdAsync(id, new QueryOptions<Order> { Includes = "OrderItems, OrderItems.Item" });            
             return View(order);
         }
