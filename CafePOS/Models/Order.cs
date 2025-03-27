@@ -17,7 +17,9 @@ namespace CafePOS.Models
         [Required]
         public Guid CafeTableId { get; set; }
         public decimal TotalAmount { get; set; }
-        public string OrderStatus { get; set; }
+        public string OrderStatus { get; set; }        
+        public string PaymentStatus { get; set; }
+        public string Notes { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         [ValidateNever]

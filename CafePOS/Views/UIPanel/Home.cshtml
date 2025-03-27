@@ -25,7 +25,7 @@
                             </div>
                             @foreach(var order in @ViewBag.Orders)                           
                             {                                
-                                if (@cTable.CafeTableId == @order.CafeTableId)
+                                @if (@cTable.CafeTableId == @order.CafeTableId && @order.PaymentStatus == "Waiting") 
                                 {
                                     <p class="fw-bold text-decoration-underline text-primary mb-0">Order Count : <span>1</span> </p>
                                 }                                

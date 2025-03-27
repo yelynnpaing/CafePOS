@@ -1,8 +1,6 @@
-﻿@model OrderViewModel
-
-
+﻿@model Order
 @{
-    ViewBag.Title = "View Cart";
+    ViewBag.Title = "Make Payment";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
 
@@ -10,11 +8,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="mt-4">
-                <h5 class="mb-3 fw-bold text-decoration-underline">View Items in Cart</h5>
-                <form asp-action="PlaceOrder" method="post">                    
+                <h5 class="mb-3 fw-bold text-decoration-underline">Make Payment for Order</h5>
+                <form asp-action="MakePayment" method="post">
+                    <input type="hidden" asp-for="@Model.OrderId" />
                     <table class="table table-responsive">
                         <thead>
-                            <tr>
+                            <tr>                                
                                 <th>Item Name</th>
                                 <th>Item Price</th>
                                 <th>Item Quantity</th>
@@ -22,25 +21,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for (int i = 0; i < Model.OrderItems.Count(); i++)
+                            @foreach (var item in Model.OrderItems)
                             {
-                                <tr>
-                                    <td>@Model.OrderItems[i].ItemName</td>
-                                    <td>@Model.OrderItems[i].Price</td>
-                                    <td>@Model.OrderItems[i].Quantity</td>
+                                <tr>                                    
+                                    <td>@item.Item.ItemName</td>
+                                    <td>@item.UnitPrice</td>
+                                    <td>@item.Quantity</td>
                                     <td></td>
                                 </tr>
                             }
                             <tr>
                                 <td></td>
                                 <td></td>
-                                <td></td>
+                                <td></td>                                
                                 <td class="bg-primary text-white fw-bold">@Model.TotalAmount - MMK</td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="mt-5 mb-3">
-                        <h6>To Place Order, Please Fill the followings : </h6>
+                        <h6>To make payment for Order, Please Refill the followings : </h6>
                     </div>
                     <div class="border p-3">
                         <div class="mb-3">
@@ -57,24 +56,32 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label>Table Number <span class="text-danger">( Choose Rquire )</span> </label>
-                            <!-- 
-                            <input type="text" name="tableNumber" class="form-control"/> -->
-                            <select asp-items="@ViewBag.CafeTables" class="form-control" name="cafeTableId">
-                                <option>Select Table Number</option>
-                             </select>
+                            <label>Table Number : </label>
+                            @foreach (var cafeTable in ViewBag.CafeTables)
+                            {
+                                if (@cafeTable.CafeTableId == @Model.CafeTableId)
+                                {
+                                    <input type="text" value="@cafeTable.TableNumber" name="cafeTableId" id="cafeTableId" class="form-control" readonly />
+                                }                               
+                            }
+                                                   
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Payment Statsu</label>
+                            <label class="form-label">Payment Status</label>
                             <select class="form-select" id="paymentStatus" name="paymentStatus">
                                 <option value="Waiting">Waiting</option>
                                 <option value="Done">Done</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Notes</label>
+                            <input type="text" name="notes" class="form-control" placeholder="eg..kbz pay" />
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Place Order</button>
+                    <button type="submit" class="btn btn-primary mt-3">Update Order</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+

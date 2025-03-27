@@ -17,7 +17,9 @@
                             <th>Order Date</th>
                             <th>Table Number</th>
                             <th>Total Price</th>
-                            <th>Order Items</th>       
+                            <th>Order Items</th>     
+                            <th>Payment Status</th>
+                            <th>Notes</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -43,10 +45,22 @@
                                         <p>@item.Item.ItemName - @item.Quantity * @item.UnitPrice MMK</p>
                                     }
                                 </td>
-                                <td>
-                                    <a asp-action="EditOrder" asp-route-id="@order.OrderId" class="btn btn-sm btn-info text-white">Edit</a>
-                                    <a asp-action="MakePayment" asp-route-id="@order.OrderId" class="btn btn-sm btn-secondary text-white">Payment</a>
-                                </td>
+                                <td>@order.PaymentStatus</td>
+                                <td>@order.Notes</td>
+                                @if(@order.PaymentStatus == "Done")
+                                {
+                                    <td>
+                                        <a asp-action="EditOrder" asp-route-id="@order.OrderId" class="btn btn-sm btn-info text-white d-none">Edit</a>
+                                        <a asp-action="MakePayment" asp-route-id="@order.OrderId" class="btn btn-sm btn-secondary text-white mt-2 d-none">Payment</a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <a asp-action="EditOrder" asp-route-id="@order.OrderId" class="btn btn-sm btn-info text-white">Edit</a>
+                                        <a asp-action="MakePayment" asp-route-id="@order.OrderId" class="btn btn-sm btn-secondary text-white mt-2">Payment</a>
+                                    </td>
+                                }
                             </tr>
                         }
                     </tbody>

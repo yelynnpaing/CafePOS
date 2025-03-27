@@ -108,7 +108,7 @@ namespace CafePOS.Controllers.UI
         
         [Route("placeOrder")]
         [HttpPost]
-        public async Task<IActionResult> PlaceOrder(string orderType, string orderStatus, Guid cafeTableId)
+        public async Task<IActionResult> PlaceOrder(string orderType, string orderStatus, Guid cafeTableId, string paymentStatus)
         {
             var model = HttpContext.Session.Get<OrderViewModel>("OrderViewModel");
             if(model == null || model.OrderItems.Count == 0)
@@ -125,6 +125,8 @@ namespace CafePOS.Controllers.UI
                 OrderStatus = orderStatus,
                 CafeTableId = cafeTableId,
                 //TableNumber = tableNumber,
+                PaymentStatus = paymentStatus,
+                Notes = "Waiting Payment",
                 TotalAmount = model.TotalAmount,
                 UserId = Guid.Parse(_userManager.GetUserId(User))
             };
@@ -184,7 +186,7 @@ namespace CafePOS.Controllers.UI
 
         [Route("updateOrder")]
         [HttpPost]
-        public async Task<IActionResult> UpdateOrder(Guid OrderId, string orderType, string orderStatus, Guid cafeTableId)
+        public async Task<IActionResult> UpdateOrder(Guid OrderId, string orderType, string orderStatus, Guid cafeTableId, string paymentStatus)
         {
             var model = await _orders.GetByIdAsync(OrderId, new QueryOptions<Order> { Includes = "OrderItems, OrderItems.Item, CafeTable" });
             if (model is null) return NotFound();
@@ -192,8 +194,36 @@ namespace CafePOS.Controllers.UI
             model.OrderType = orderType;
             model.OrderStatus = orderStatus;
             model.CafeTableId = cafeTableId;
+            model.PaymentStatus = paymentStatus;
+            model.Notes = "Waiting Payment";
 
             await _orders.UpdateAsync(model);            
+            return RedirectToAction("View");
+        }
+
+        [Route("makePayment")]
+        [HttpGet]
+        public async Task<IActionResult> MakePayment(Guid id)
+        {
+            var order = await _orders.GetByIdAsync(id, new QueryOptions<Order> { Includes = "OrderItems, OrderItems.Item" });
+            ViewBag.CafeTables = await _cafeTables.GetAllAsync();           
+            return View(order);
+        }
+
+        [Route("makePayment")]
+        [HttpPost]
+        public async Task<IActionResult> MakePayment(Guid OrderId, string orderType, string orderStatus, string paymentStatus, string notes)
+        {
+            var model = await _orders.GetByIdAsync(OrderId, new QueryOptions<Order> { Includes = "OrderItems, OrderItems.Item, CafeTable" });
+            if (model is null) return NotFound();
+            model.UpdatedAt = DateTime.Now;
+            model.OrderType = orderType;
+            model.OrderStatus = orderStatus;
+            //model.CafeTableId = cafeTableId;
+            model.PaymentStatus = paymentStatus;
+            model.Notes = notes;
+
+            await _orders.UpdateAsync(model);
             return RedirectToAction("View");
         }
 

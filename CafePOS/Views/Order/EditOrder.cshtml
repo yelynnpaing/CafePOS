@@ -68,12 +68,19 @@
                                 <option value="Completed">Completed</option>
                             </select>
                         </div>
-                        <div class="">
+                        <div class="mb-3">
                             <label>Table Number : </label>
                             <!-- 
                             <input type="text" asp-for="TableNumber" name="tableNumber" class="form-control" /> -->
                             <select asp-for="CafeTableId" asp-items="@ViewBag.CafeTables" id="cafeTableId" class="form-control">
                                 <option>Select Table Number</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Payment Status</label>
+                            <select class="form-select" id="paymentStatus" name="paymentStatus">
+                                <option value="Waiting">Waiting</option>
+                                <option value="Done">Done</option>
                             </select>
                         </div>
                     </div>
