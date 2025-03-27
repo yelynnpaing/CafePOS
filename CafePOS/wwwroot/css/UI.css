@@ -39,7 +39,7 @@ body {
 }
 
 .navbar-left-side-item:hover {
-    background-color: gray;    
+    background-color: gray;        
     transition: 0.2s ease-in-out;
 }
 

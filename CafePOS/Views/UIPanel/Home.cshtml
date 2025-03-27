@@ -19,7 +19,7 @@
                 @foreach (var cTable in Model)
                 {
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
-                        <a asp-controller="Order" asp-action="View" class="text-decoration-none">
+                        
                             <div class="circle">
                                 <h5>@cTable.TableNumber</h5>
                             </div>
@@ -27,10 +27,12 @@
                             {                                
                                 @if (@cTable.CafeTableId == @order.CafeTableId && @order.PaymentStatus == "Waiting") 
                                 {
+                                <a asp-controller="Order" asp-action="EditOrder" asp-route-id="@order.OrderId" class="text-decoration-none">
                                     <p class="fw-bold text-decoration-underline text-primary mb-0">Order Count : <span>1</span> </p>
+                                </a>
                                 }                                
                             }
-                        </a>
+                        
                     </div>
                 }
             </div>

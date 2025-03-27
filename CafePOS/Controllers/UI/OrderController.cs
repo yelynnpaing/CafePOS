@@ -33,8 +33,7 @@ namespace CafePOS.Controllers.UI
             _cafeTables = new Repository<CafeTable>(context);
             _userManager = userManager;
         }
-
-        [Authorize]
+                
         [Route("create")]
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -153,11 +152,11 @@ namespace CafePOS.Controllers.UI
             var userId = Guid.Parse(_userManager.GetUserId(User));
             var userOrders = await _orders.GetAllByIdAsync(userId, "UserId", new QueryOptions<Order>
             {
-                Includes = "OrderItems.Item"
+                Includes = "OrderItems.Item",                
             });
             ViewBag.CafeTables = await _cafeTables.GetAllAsync();
-
-            return View(userOrders);
+            var sortOrders = userOrders.OrderByDescending(o => o.CreatedAt).ToList();
+            return View(sortOrders);
         }
 
         [Route("editOrder")]
