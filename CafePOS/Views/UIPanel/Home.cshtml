@@ -14,14 +14,23 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 mb-5">
             <div class="p-3 row">
                 @foreach (var cTable in Model)
                 {
-                    <div class="col-md-2 mb-5">
-                        <div class="circle">
-                            <h5>@cTable.TableNumber</h5>
-                        </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+                        <a asp-controller="Order" asp-action="View" class="text-decoration-none">
+                            <div class="circle">
+                                <h5>@cTable.TableNumber</h5>
+                            </div>
+                            @foreach(var order in @ViewBag.Orders)                           
+                            {                                
+                                if (@cTable.CafeTableId == @order.CafeTableId)
+                                {
+                                    <p class="fw-bold text-decoration-underline text-primary mb-0">Order Count : <span>1</span> </p>
+                                }                                
+                            }
+                        </a>
                     </div>
                 }
             </div>
@@ -36,7 +45,40 @@
             </div>
         </div>
         <div class="col-md-12">
-
+            <div class="row">
+                @foreach(var item in ViewBag.Items)
+                {
+                    if(item.TodaySpecial == true)
+                    {
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="card">
+                                <img src="@Url.Content("~/Images/"+@item.ImageUrl)" class="card-img-top" style="height:150px;" />
+                                <div class="card-body">
+                                    <h6 class="card-title">@item.ItemName</h6>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <p class="card-text fw-bold text-black-50 mb-0">Ks @item.Price</p>
+                                        @if (@item.StockQuantity > 0)
+                                        {
+                                            <small class="card-text">InStock - @item.StockQuantity</small>
+                                        }
+                                        else
+                                        {
+                                            @if (item.IsAvailable)
+                                            {
+                                                <small class="card-text">Available</small>
+                                            }
+                                            else
+                                            {
+                                                <small class="card-text">Not Available</small>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
         </div>
     </div>
 </div>

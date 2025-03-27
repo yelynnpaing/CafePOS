@@ -47,7 +47,7 @@ namespace CafePOS.Controllers.AdminPanel
             {
                 try
                 {
-                    _cafeTables.AddAsync(cafeTable);
+                    await _cafeTables.AddAsync(cafeTable);
                 }
                 catch(Exception ex)
                 {

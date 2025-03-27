@@ -44,8 +44,8 @@ body {
 }
 
 .circle {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     background-color: #3498db; 
     border-radius: 50%; 
     display: flex;
