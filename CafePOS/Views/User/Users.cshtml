@@ -12,7 +12,7 @@
                 <h5 class="text-decoration-underline fw-bold">User List</h5>
                 <hr />
            </div>
-           <div class="border p-3">
+            <div class="border p-3 overflow-scroll">
                <table class="table table-responsive">
                    <thead>
                        <tr>
@@ -29,7 +29,7 @@
                         @foreach(var user in Model)
                         {
                             <tr>
-                                <td class="serailNum"></td>
+                                <td class="serialNum">.</td>
                                 <td>@user.Id</td>
                                 <td>@user.Email</td>
                                 <td>@user.UserName</td>

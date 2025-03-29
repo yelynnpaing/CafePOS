@@ -1,141 +1,31 @@
 ﻿
 
 @{
-    ViewData["Title"] = "Admin Panel";
+    ViewBag.Title = "Admin Panel";
     Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
 }
 
-<div class="">
-    <h3>Admin panel</h3>
-    <table class="table table-responsive">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>twitter</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>twitter</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>twitter</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>twitter</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>twitter</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>twitter</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>twitter</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+           <div class="border row pt-5 ps-5 pe-5 justify-content-between">
+               <div class="col-12 col-sm-6 col-md-3 col-lg-3 square-item mb-5">
+                   <h5>POS Users</h5>
+                   <h5>@ViewBag.AllUsers</h5>
+               </div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-3 square-item mb-5">
+                    <h5>Total Items</h5>
+                    <h5 class="mt-2">@ViewBag.Items.Count</h5>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-3 square-item mb-5">
+                    <h5>Cafe Tables</h5>
+                    <h5>@ViewBag.CafeTables.Count</h5>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-3 square-item mb-5">
+                    <h5>Total Orders</h5>
+                    <h5>@ViewBag.Orders.Count</h5>
+                </div>
+           </div>
+        </div>
+    </div>
 </div>

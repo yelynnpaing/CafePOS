@@ -3,8 +3,13 @@
 
 body {
     font-family: "Roboto", sans-serif;
+    counter-reset: section;
 }
 
+.serialNum::before{
+    counter-increment: section;
+    content:counter(section);
+}
 .header {
     background: #ffffffb5;
     backdrop-filter: blur(15px) contrast(130%);

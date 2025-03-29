@@ -29,8 +29,12 @@ namespace CafePOS.Controllers.AdminPanel
 
         [Route("dashboard")]
         [HttpGet]
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
+            ViewBag.AllUsers = _userManager.Users.Count();
+            ViewBag.Items = await _items.GetAllAsync();
+            ViewBag.CafeTables = await _cafeTables.GetAllAsync();
+            ViewBag.Orders = await _orders.GetAllAsync();
             return View();
         }
 

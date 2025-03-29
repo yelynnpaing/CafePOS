@@ -20,6 +20,7 @@
             <table class="table table-responsive">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th class="d-none">Id</th>
                         <th>Image</th>
                         <th>Item</th>
@@ -37,6 +38,7 @@
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td class="serialNum">.</td>
                             <td class="d-none">@item.ItemId</td>
                             <td><img src="@Url.Content("~/images/"+item.ImageUrl)" class="" style="width:150px; height:100px;" /></td>
                             <td>@item.ItemName</td>
