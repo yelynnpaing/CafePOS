@@ -28,8 +28,11 @@ namespace CafePOS.Controllers.AdminPanel
         [Route("list")]
         [HttpGet]
         public async Task<IActionResult> Items()
-        {           
-            return View(await items.GetAllAsync());
+        {
+            var Items = await items.GetAllAsync();
+            var sortItems = Items.OrderByDescending(i => i.CreatedAt).ToList();
+
+            return View(sortItems);
         }
 
         [Route("addEdit")]

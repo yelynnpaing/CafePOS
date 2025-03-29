@@ -23,7 +23,7 @@
                     </nav>
                     <nav class="nav flex-column tansition-effect1" id="mainSidebarItem">
                         <a href="#" class="nav-link icon-link-hover text-white navbar-left-side-item">
-                            <i class="bi bi-speedometer2 side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Dashboard Admin</span>
+                            <i class="bi bi-speedometer2 side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Admin Dashboard</span>
                         </a>
                         <a class="nav-link text-white navbar-left-side-item d-flex" data-bs-toggle="collapse" type="button" data-bs-target="#catCollapse"
                            role="button" aria-expanded="false" aria-controls="catCollapse" id="catCollapseBtn">
@@ -58,15 +58,12 @@
                         <a href="/admin/cafe-tables/list" class="nav-link text-white navbar-left-side-item">
                             <i class="bi bi-bounding-box side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Tables</span>
                         </a>
-                        <a href="" class="nav-link text-white navbar-left-side-item">
+                        <a href="/admin/orders" class="nav-link text-white navbar-left-side-item">
+                            <i class="bi bi-cash-coin side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Orders</span>
+                        </a>
+                        <a href="/admin/users" class="nav-link text-white navbar-left-side-item">
                             <i class="bi bi-person-circle side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Users</span>
-                        </a>
-                        <a href="#" class="nav-link text-white navbar-left-side-item">
-                            <i class="bi bi-cash-coin side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Order</span>
-                        </a>                        
-                        <a href="#" class="nav-link text-white navbar-left-side-item">
-                            <i class="bi bi-credit-card side-icon"></i><span class="d-none d-md-inline ms-2 side-label">Billing</span>
-                        </a>
+                        </a> 
                     </nav>
                 </div>
             </div>
@@ -83,7 +80,7 @@
                             </ul>
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" asp-controller="Account" asp-action="Logout">
                                         <i class="bi bi-arrow-bar-right pe-1"></i>
                                         Logout
                                     </a>

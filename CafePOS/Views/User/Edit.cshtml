@@ -1,0 +1,56 @@
+﻿@model Users
+
+@{
+    ViewBag.Title = "User Edit";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <h5 class="text-decoration-underline fw-bold">User Edit</h5>
+                <hr />
+            </div>
+            <div class="border p-3">
+                <form asp-controller="User" asp-action="Edit" method="post">
+                    <div class="form-group mb-3">
+                        <input asp-for="@Model.Id" class="form-control" hidden/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <lable asp-for="@Model.Email" class="form-label">Email : </lable>
+                        <input type="text" asp-for="@Model.Email" class="form-control" />
+                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <lable asp-for="@Model.UserName" class="form-label">User Name : </lable>
+                        <input type="text" asp-for="@Model.UserName" class="form-control" />
+                        <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <lable asp-for="@Model.FullName" class="form-label">Full Name : </lable>
+                        <input type="text" asp-for="@Model.FullName" class="form-control" />
+                        <span asp-validation-for="@Model.FullName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label>User Role : </label>
+                        <select asp-for="UserRole" class="form-select" id="userRole" name="userRole">
+                            <option value="User">User</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">User Status</label>
+                        <select asp-for="UserStatus" id="userStatus" name="userStatus" class="form-select">
+                            <option value="Active">Active</option>
+                            <option value="InActive">InActive</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a class="btn btn-secondary ms-3" asp-action="Users" asp-controller="User">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

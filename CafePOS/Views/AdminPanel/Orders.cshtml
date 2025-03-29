@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Order>
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row border p-3">
+        <div class="col-md-12">
+            <div>
+                <h5 class="fw-bold text-decoration-underline">Order List</h5>
+                <hr class="mb-3" />
+            </div>
+            <div class="mb-3">
+                <form asp-action="" method="" class="d-flex">
+                    <input class="form-control me-3" name="search" type="search" placeholder="Search item or others ... "  />
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+            <div>
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Order Id</th>
+                            <th>Account Name</th>
+                            <th>Order Date</th>
+                            <th>Table Number</th>
+                            <th>Total Price</th>
+                            <th>Order Items</th>
+                            <th>Payment Status</th>
+                            <th>Notes</th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.OrderId</td>
+                                <td>@order.UserId</td>
+                                <td>@order.CreatedAt</td>
+                                <td class="text-center">
+                                    @foreach (var cafeTable in ViewBag.CafeTables)
+                                    {
+                                        if (@cafeTable.CafeTableId == @order.CafeTableId)
+                                        {
+                                            <span>@cafeTable.TableNumber</span>
+                                        }
+                                    }
+                                </td>
+                                <td>@order.TotalAmount</td>
+                                <td>
+                                    @foreach (var item in order.OrderItems)
+                                    {
+                                        <p>@item.Item.ItemName - @item.Quantity * @item.UnitPrice MMK</p>
+                                    }
+                                </td>
+                                @if (@order.PaymentStatus == "Waiting")
+                                {
+                                    <td class="bg-warning">@order.PaymentStatus</td>
+                                }
+                                else
+                                {
+                                    <td>@order.PaymentStatus</td>
+                                }
+
+                                <td>@order.Notes</td>                                
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

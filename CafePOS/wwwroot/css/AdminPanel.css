@@ -3,6 +3,12 @@
 
 body {
     font-family: "Roboto", sans-serif;
+    counter-reset: section;
+}
+
+.serailNum::before {
+    counter-increment: section;
+    content: counter(section);
 }
 
 .header {

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Users>
+
+@{
+    ViewBag.Title = "User Manage";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+           <div>
+                <h5 class="text-decoration-underline fw-bold">User List</h5>
+                <hr />
+           </div>
+           <div class="border p-3">
+               <table class="table table-responsive">
+                   <thead>
+                       <tr>
+                           <th>#</th>
+                           <th>Id</th>
+                            <th>Email</th>
+                            <th>User Name</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                        @foreach(var user in Model)
+                        {
+                            <tr>
+                                <td class="serailNum"></td>
+                                <td>@user.Id</td>
+                                <td>@user.Email</td>
+                                <td>@user.UserName</td>
+                                <td>@user.FullName</td>
+                                <td>@user.UserStatus</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-sm btn-info">
+                                        <i class="bi bi-pencil-square me-1"></i>
+                                        Edit
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure want to delete this user?')">
+                                        <i class="bi bi-trash me-1"></i>
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+               </table>
+           </div>
+        </div>
+    </div>
+</div>

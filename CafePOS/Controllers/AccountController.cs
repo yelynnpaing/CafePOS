@@ -52,7 +52,9 @@ namespace CafePOS.Controllers
                 {
                     FullName = model.Name,
                     Email = model.Email,
-                    UserName = model.Email
+                    UserName = model.Email,
+                    UserRole = "User",
+                    UserStatus = "Active"
                 };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
