@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CafePOS.Controllers.UI
 {
     [Authorize]
-    [Route("mm-cafe/")]
+    //[Route("mm-cafe")]
     public class UIPanelController : Controller
     {
         private readonly AppDbContext _context;
@@ -24,7 +24,7 @@ namespace CafePOS.Controllers.UI
             _orderItems = new Repository<OrderItem>(context);
         }
 
-        [Route("home")]
+        //[Route("home")]
         [HttpGet]
         public async Task<IActionResult> Home()
         {

@@ -44,6 +44,7 @@ namespace CafePOS.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -53,12 +54,14 @@ namespace CafePOS.Controllers
                     FullName = model.Name,
                     Email = model.Email,
                     UserName = model.Email,
-                    UserRole = "User",
+                    //UserRole = "User",
                     UserStatus = "Active"
                 };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await userManager.AddToRoleAsync(user, "User");
+                    await signInManager.SignInAsync(user, isPersistent:false);
                     return RedirectToAction("Login", "Account");
                 }
                 else

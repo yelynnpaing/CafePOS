@@ -32,11 +32,19 @@
                         <input type="text" asp-for="@Model.FullName" class="form-control" />
                         <span asp-validation-for="@Model.FullName" class="text-danger"></span>
                     </div>
+                    <!--
                     <div class="mb-3">
                         <label>User Role : </label>
                         <select asp-for="UserRole" class="form-select" id="userRole" name="userRole">
                             <option value="User">User</option>
                             <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+                    -->
+                    <div class="mb-3">
+                        <label class="form-label">User Role : </label>
+                        <select asp-for="NewRole" class="form-control" asp-items="@(new SelectList(Model.AvailableRoles))">
+                            <option>Select Role</option>
                         </select>
                     </div>
                     <div class="mb-3">

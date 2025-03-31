@@ -12,8 +12,14 @@ namespace CafePOS.Models
         }
 
         public string FullName { get; set; }
+        //[ValidateNever]
+        //public string UserRole { get; set; }
         [ValidateNever]
-        public string UserRole { get; set; }
+        public List<string>? CurrentRoles { get; set; }
+        [ValidateNever]
+        public List<string>? AvailableRoles { get; set; }
+        [ValidateNever]
+        public string? NewRole { get; set; }
         [ValidateNever]
         public string UserStatus { get; set; }
         public ICollection<Order> Orders { get; set; }

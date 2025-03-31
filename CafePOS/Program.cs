@@ -50,10 +50,16 @@ app.UseRouting();
 
 app.UseAuthorization();
 app.UseSession();
+//app.MapControllers();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=LogIn}/{id?}");
+    pattern: "{controller=UIPanel}/{action=Home}/{id?}");
 
+using(var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await RoleInitializer.SeedRole(services);
+}
 
 app.Run();

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CafePOS.Controllers.AdminPanel
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     [Route("admin/")]
     public class AdminPanelController : Controller
     {
@@ -45,28 +45,9 @@ namespace CafePOS.Controllers.AdminPanel
             var Orders = await _orders.GetAllAsync();
             var sortOrders = Orders.OrderByDescending(o => o.CreatedAt).ToList();
             ViewBag.CafeTables = await _cafeTables.GetAllAsync();
-            //var Users = await _userManager.Users.ToListAsync();
-            //var orderWithUser = Orders.Select(order => new
-            //{
-            //    OrderId = order.OrderId,
-            //    UserId = order.UserId,
-            //    FullName = Users.FirstOrDefault(u => u.Id == (order.UserId).ToString())?.FullName ?? "Unknown",
-            //    OrderType = order.OrderType,
-            //    CafeTableId = order.CafeTableId,
-            //    TotalAmount = order.TotalAmount,
-            //    OrderStatus = order.OrderStatus,
-            //    PaymentStatus = order.PaymentStatus,
-            //    Notes = order.Notes,
-            //    CreatedAt = order.CreatedAt,
-            //    UpdatedAt = order.UpdatedAt
-            //});
-            //ViewData.Model = orderWithUser;
-            //return View("Orders", orderWithUser);
+            var Users = await _userManager.Users.ToListAsync();            
 
-            //filter with search string 
-            
             return View(sortOrders);
         }
-
     }
 }
