@@ -13,8 +13,8 @@
                 <hr class="mb-3" />
             </div>
             <div class="mb-3">
-                <form asp-action="" method="" class="d-flex">
-                    <input class="form-control me-3" name="search" type="search" placeholder="Search item or others ... "  />
+                <form asp-action="Orders" method="" class="d-flex">
+                    <input class="form-control me-3" name="search" type="search" placeholder="Enter table number ... "  />
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
@@ -24,7 +24,7 @@
                         <tr>
                             <th>#</th>
                             <th>Order Id</th>
-                            <th>Account Name</th>
+                            <th>Account Id</th>
                             <th>Order Date</th>
                             <th>Table Number</th>
                             <th>Total Price</th>
@@ -39,7 +39,7 @@
                             <tr>
                                 <td class="serialNum">.</td>
                                 <td>@order.OrderId</td>
-                                <td>@order.UserId</td>
+                                <td>@order.UserId</td>                                
                                 <td>@order.CreatedAt</td>
                                 <td class="text-center">
                                     @foreach (var cafeTable in ViewBag.CafeTables)

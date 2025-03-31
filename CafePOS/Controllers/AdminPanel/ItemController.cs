@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace CafePOS.Controllers.AdminPanel
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [Route("admin/item/")]
     public class ItemController : Controller
     {

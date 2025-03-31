@@ -6,7 +6,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace CafePOS.Controllers.AdminPanel
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [Route("admin/category")]
     public class CategoryController : Controller
     {

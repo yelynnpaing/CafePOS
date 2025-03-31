@@ -1,10 +1,12 @@
 ﻿using CafePOS.Data;
 using CafePOS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CafePOS.Controllers.AdminPanel
 {
+    [Authorize(Roles ="Admin")]
     [Route("admin/cafe-tables/")]
     public class CafeTableController : Controller
     {

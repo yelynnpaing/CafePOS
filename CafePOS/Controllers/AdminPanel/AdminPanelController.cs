@@ -40,13 +40,17 @@ namespace CafePOS.Controllers.AdminPanel
 
         [Route("orders")]
         [HttpGet]
-        public async Task<IActionResult> Orders()
+        public async Task<IActionResult> Orders(string search)
         {
             var Orders = await _orders.GetAllAsync();
             var sortOrders = Orders.OrderByDescending(o => o.CreatedAt).ToList();
             ViewBag.CafeTables = await _cafeTables.GetAllAsync();
-            var Users = await _userManager.Users.ToListAsync();            
-
+            var Users = await _userManager.Users.ToListAsync();
+            if (!string.IsNullOrEmpty(search))
+            {
+                sortOrders = sortOrders.Where(so => so.CafeTable.TableNumber.ToString().Contains(search)).ToList();
+                //sortOrders = sortOrders.Where(so => so.UserId.ToString().Contains(search)).ToList();
+            }
             return View(sortOrders);
         }
     }
